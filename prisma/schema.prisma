@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  business
+  admin
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  name          String?
+  image         String?
+  role          UserRole  @default(business)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions   Session[]
+  accounts   Account[]
+  profiles   Profile[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Account {
+  id                    String   @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verifications")
+}
+
+model Profile {
+  id        String @id @default(cuid())
+  userId    String @unique
+  username  String @unique
+  businessName String
+  category  String
+  description String?
+  phone     String?
+  whatsapp  String?
+  email     String?
+  website   String?
+  logoUrl   String?
+  coverUrl  String?
+  theme     String  @default("light")
+  isPublished Boolean @default(false)
+  completedSteps Int @default(0)
+  totalSteps    Int @default(10)
+
+  location  Json?
+  socialLinks Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([category])
+  @@index([username])
+  @@map("profiles")
+}

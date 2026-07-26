@@ -1,0 +1,26 @@
+export { MegaNav } from "./mega-nav";
+export { HeroCinematic } from "./hero-cinematic";
+export { TrustBar } from "./trust-bar";
+export { HowItWorks } from "./how-it-works";
+export { BenefitIdentity } from "./benefit-identity";
+export { BenefitQR } from "./benefit-qr";
+export { BenefitTrust } from "./benefit-trust";
+export { BenefitReviews } from "./benefit-reviews";
+export { BenefitVerification } from "./benefit-verification";
+export { BenefitStorefront } from "./benefit-storefront";
+export { LifeTimeline } from "./life-timeline";
+export { PortfolioGallery } from "./portfolio-gallery";
+export { StatsBranded } from "./stats-branded";
+export { FAQSection } from "./faq-section";
+export { MegaFooter } from "./mega-footer";
+
+export { LandingNav } from "./landing-nav";
+export { HeroSection } from "./hero-section";
+export { FeaturesGrid } from "./features-grid";
+export { TimelineSection } from "./timeline-section";
+export { IdentityShowcase } from "./identity-showcase";
+export { QRExperience } from "./qr-experience";
+export { Testimonials } from "./testimonials";
+export { StatsSection } from "./stats-section";
+export { CTASection } from "./cta-section";
+export { LandingFooter } from "./landing-footer";
