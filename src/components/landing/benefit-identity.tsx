@@ -31,154 +31,147 @@ export function BenefitIdentity() {
             {/* Left: Profile composition */}
             <motion.div style={{ y: parallaxY }} className="lg:col-span-6 order-2 lg:order-1">
               <div className="relative max-w-md mx-auto lg:mx-0">
-                {/* The Official WorkTag Card */}
+                {/* The Official WorkTag Card — Premium */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative rounded-2xl overflow-hidden bg-white shadow-[0_12px_48px_-8px_rgba(2,65,168,0.15)] border border-[#E8EBF2]/60"
+                  className="relative rounded-2xl overflow-hidden shadow-[0_24px_80px_-12px_rgba(2,65,168,0.2)] border border-white/[0.08]"
                 >
+                  {/* Card background — subtle gradient, not flat */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0241A8] via-[#012d7a] to-[#011d52]" />
+                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvc3ZnPg==')] opacity-60" />
+
                   {/* Card content */}
-                  <div className="p-7 pb-6">
-                    {/* Brand mark */}
-                    <div className="flex items-center gap-1.5 mb-6">
-                      <div className="h-4 w-4 rounded bg-[#0241A8] flex items-center justify-center">
-                        <svg viewBox="0 0 1254 1254" fill="none" className="h-3 w-3">
-                          <path fill="#FDC304" d="M556.057129,742.076294 C501.786530,745.407104 459.961334,702.722351 464.173920,648.810547 C466.747742,615.871277 491.009644,586.103210 524.089355,575.297424 C554.953674,565.215271 590.627991,575.356140 612.173401,600.336243 C655.742371,650.850769 629.973145,727.492981 564.912292,740.842224 C562.145386,741.409973 559.309326,741.640442 556.057129,742.076294 Z" />
-                        </svg>
+                  <div className="relative p-7 pb-6">
+                    {/* Top row: brand mark + ID */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-1.5">
+                        <div className="h-4 w-4 rounded-sm bg-white/10 flex items-center justify-center">
+                          <svg viewBox="0 0 1254 1254" fill="none" className="h-3 w-3">
+                            <path fill="#FDC304" d="M556.057129,742.076294 C501.786530,745.407104 459.961334,702.722351 464.173920,648.810547 C466.747742,615.871277 491.009644,586.103210 524.089355,575.297424 C554.953674,565.215271 590.627991,575.356140 612.173401,600.336243 C655.742371,650.850769 629.973145,727.492981 564.912292,740.842224 C562.145386,741.409973 559.309326,741.640442 556.057129,742.076294 Z" />
+                          </svg>
+                        </div>
+                        <span className="text-[8px] font-bold tracking-[0.25em] text-white/30 uppercase">WorkTag</span>
                       </div>
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#0241A8]/40 uppercase">WorkTag</span>
+                      <span className="text-[9px] font-medium text-white/25 tracking-[0.08em]">WT-8F2K-9X4M</span>
                     </div>
 
-                    {/* Photo — centered, circular */}
-                    <div className="flex justify-center mb-4">
+                    {/* Photo + Info row */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="relative shrink-0">
+                        <div className="h-14 w-14 rounded-full overflow-hidden ring-2 ring-white/10">
+                          <Image src="/images/avatars/funke.jpg" alt="Funke Ogunlesi" width={56} height={56} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#10B981] flex items-center justify-center ring-[2px] ring-[#0241A8]">
+                          <Check className="h-2 w-2 text-white stroke-[3]" />
+                        </div>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[14px] font-bold text-white leading-tight tracking-[-0.01em]">Funke Ogunlesi</h3>
+                        <p className="text-[11px] text-white/50 mt-0.5">Funke&apos;s Kitchen</p>
+                        <p className="text-[10px] text-white/30 mt-0.5">Catering & Events · Lagos</p>
+                      </div>
+                    </div>
+
+                    {/* Trust — understated, integrated */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="flex items-center gap-2">
+                        <div className="text-[18px] font-[800] text-white leading-none">97</div>
+                        <div className="text-[8px] text-white/30 font-medium leading-tight">Trust<br/>Score</div>
+                      </div>
+                      <div className="w-px h-6 bg-white/10" />
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                        <span className="text-[10px] font-semibold text-[#10B981]">Verified</span>
+                      </div>
+                      <div className="w-px h-6 bg-white/10" />
+                      <div className="text-[10px] text-white/30 font-medium">Since 2022</div>
+                    </div>
+
+                    {/* QR code — refined, integrated */}
+                    <div className="flex justify-center mb-5">
                       <div className="relative">
-                        <div className="h-20 w-20 rounded-full overflow-hidden ring-[3px] ring-[#0241A8]/10">
-                          <Image src="/images/avatars/funke.jpg" alt="Funke Ogunlesi" width={80} height={80} className="w-full h-full object-cover" />
+                        <div className="w-24 h-24 rounded-lg bg-white p-1.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]">
+                          <Image src="/images/qr-worktag.webp" alt="Scan to verify" width={96} height={96} className="w-full h-full object-contain" />
                         </div>
-                        <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#10B981] flex items-center justify-center ring-[2.5px] ring-white">
-                          <Check className="h-2.5 w-2.5 text-white stroke-[3]" />
-                        </div>
+                        {/* Corner accents */}
+                        <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[#FDC304]/40 rounded-tl-sm" />
+                        <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-[#FDC304]/40 rounded-tr-sm" />
+                        <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-[#FDC304]/40 rounded-bl-sm" />
+                        <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-[#FDC304]/40 rounded-br-sm" />
                       </div>
                     </div>
 
-                    {/* Name */}
-                    <div className="text-center mb-1">
-                      <h3 className="text-[17px] font-bold text-[#090D1F] tracking-[-0.01em]">Funke Ogunlesi</h3>
-                    </div>
-
-                    {/* Business + Trade */}
-                    <div className="text-center mb-1">
-                      <p className="text-[12px] text-[#5A6A8A] font-medium">Funke&apos;s Kitchen</p>
-                    </div>
-                    <div className="text-center mb-5">
-                      <p className="text-[11px] text-[#5A6A8A]/60">Catering & Events · Lagos, Nigeria</p>
-                    </div>
-
-                    {/* Yellow accent line */}
-                    <div className="flex justify-center mb-5">
-                      <div className="h-[1.5px] w-8 rounded-full bg-[#FDC304]" />
-                    </div>
-
-                    {/* Trust Score — calm, official */}
-                    <div className="flex items-center justify-center gap-6 mb-5">
-                      <div className="text-center">
-                        <div className="text-[22px] font-[800] text-[#0241A8] leading-none">97</div>
-                        <div className="text-[8px] font-bold tracking-[0.15em] text-[#5A6A8A]/50 uppercase mt-1">Trust Score</div>
-                      </div>
-                      <div className="w-px h-8 bg-[#E8EBF2]/80" />
-                      <div className="text-center">
-                        <div className="flex items-center gap-1 justify-center">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
-                          <span className="text-[12px] font-bold text-[#10B981]">Verified</span>
-                        </div>
-                        <div className="text-[8px] font-bold tracking-[0.15em] text-[#5A6A8A]/50 uppercase mt-1">Status</div>
-                      </div>
-                    </div>
-
-                    {/* WorkTag ID — the permanent identifier */}
-                    <div className="flex justify-center mb-5">
-                      <div className="inline-flex items-center gap-2 rounded-lg bg-[#F8F9FC] border border-[#E8EBF2]/60 px-3 py-1.5">
-                        <span className="text-[10px] font-bold text-[#0241A8] tracking-[0.05em]">WT-8F2K-9X4M</span>
-                      </div>
-                    </div>
-
-                    {/* QR code — large, scannable */}
-                    <div className="flex justify-center mb-5">
-                      <div className="w-32 h-32 rounded-xl bg-white border border-[#E8EBF2]/80 p-2.5 shadow-[0_2px_12px_-2px_rgba(2,65,168,0.06)]">
-                        <Image src="/images/qr-worktag.webp" alt="Scan to verify" width={128} height={128} className="w-full h-full object-contain" />
-                      </div>
-                    </div>
-
-                    {/* Permanent URL */}
+                    {/* URL */}
                     <div className="text-center">
-                      <span className="text-[11px] font-semibold text-[#0241A8]/60">worktag.io/funke</span>
+                      <span className="text-[10px] font-medium text-white/25 tracking-wide">worktag.io/funke</span>
                     </div>
                   </div>
 
-                  {/* Card footer — member since */}
-                  <div className="border-t border-[#E8EBF2]/60 px-7 py-3 flex items-center justify-between">
-                    <span className="text-[9px] font-medium text-[#5A6A8A]/40">Member since 2022</span>
-                    <span className="text-[9px] font-medium text-[#5A6A8A]/40">Afara Digital Solutions</span>
-                  </div>
+                  {/* Subtle bottom accent line */}
+                  <div className="h-[2px] bg-gradient-to-r from-transparent via-[#FDC304]/30 to-transparent" />
                 </motion.div>
 
-                {/* Floating acrylic tag */}
+                {/* Floating acrylic tag — premium */}
                 <motion.div
                   initial={{ opacity: 0, y: 20, rotate: -3 }}
                   whileInView={{ opacity: 1, y: 0, rotate: -3 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.3 }}
-                  className="absolute -bottom-5 -right-5 w-44 h-28 rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.4)] border border-white/[0.08] bg-[#0241A8] hidden sm:block"
+                  className="absolute -bottom-5 -right-5 w-48 h-28 rounded-xl overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.5)] hidden sm:block"
                 >
-                  <div className="p-3 h-full flex flex-col justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0241A8] via-[#012d7a] to-[#011d52]" />
+                  <div className="relative p-3 h-full flex flex-col justify-between">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="h-7 w-7 rounded-full overflow-hidden ring-1 ring-white/20">
+                        <div className="h-7 w-7 rounded-full overflow-hidden ring-1 ring-white/10">
                           <Image src="/images/avatars/funke.jpg" alt="Funke" width={28} height={28} className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <div className="text-[8px] font-bold text-white leading-tight">Funke Ogunlesi</div>
-                          <div className="text-[6px] text-white/50">Funke&apos;s Kitchen</div>
+                          <div className="text-[6px] text-white/40">Funke&apos;s Kitchen</div>
                         </div>
                       </div>
-                      <div className="h-8 w-8 rounded bg-white/10 flex items-center justify-center">
-                        <div className="h-6 w-6 bg-white rounded-sm" />
+                      <div className="h-7 w-7 rounded bg-white/5 flex items-center justify-center">
+                        <div className="h-5 w-5 bg-white rounded-sm" />
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="text-[7px] text-[#FDC304] font-bold">Verified</div>
-                      <div className="text-[6px] text-white/30 font-medium">WT-8F2K-9X4M</div>
+                      <div className="text-[6px] text-[#FDC304]/60 font-medium">WT-8F2K-9X4M</div>
+                      <div className="flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-[#10B981]" />
+                        <span className="text-[6px] text-white/30 font-medium">Verified</span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Floating PVC card */}
+                {/* Floating PVC card — premium */}
                 <motion.div
                   initial={{ opacity: 0, y: 20, rotate: 2 }}
                   whileInView={{ opacity: 1, y: 0, rotate: 2 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="absolute -top-4 -right-4 w-40 h-24 rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.4)] border border-white/[0.08] bg-white hidden sm:block"
+                  className="absolute -top-4 -right-4 w-44 h-26 rounded-xl overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.5)] hidden sm:block"
                 >
-                  <div className="p-3 h-full flex flex-col justify-between">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-7 w-7 rounded-full overflow-hidden ring-1 ring-[#0241A8]/10">
-                          <Image src="/images/avatars/funke.jpg" alt="Funke" width={28} height={28} className="w-full h-full object-cover" />
-                        </div>
-                        <div>
-                          <div className="text-[8px] font-bold text-[#090D1F] leading-tight">Funke Ogunlesi</div>
-                          <div className="text-[6px] text-[#5A6A8A]">Catering & Events</div>
-                        </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#F8F9FC]" />
+                  <div className="relative p-3 h-full flex flex-col justify-between border border-[#E8EBF2]/60 rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-full overflow-hidden ring-1 ring-[#0241A8]/10">
+                        <Image src="/images/avatars/funke.jpg" alt="Funke" width={28} height={28} className="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <div className="text-[8px] font-bold text-[#090D1F] leading-tight">Funke Ogunlesi</div>
+                        <div className="text-[6px] text-[#5A6A8A]">Catering & Events</div>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="text-[7px] font-bold text-[#0241A8]">WT-8F2K-9X4M</div>
+                      <div className="text-[6px] font-medium text-[#0241A8]/50">WT-8F2K-9X4M</div>
                       <div className="flex items-center gap-1">
                         <span className="w-1 h-1 rounded-full bg-[#10B981]" />
-                        <span className="text-[6px] font-bold text-[#10B981]">Verified</span>
+                        <span className="text-[6px] font-medium text-[#10B981]/70">Verified</span>
                       </div>
                     </div>
                   </div>
