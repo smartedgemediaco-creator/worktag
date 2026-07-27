@@ -47,6 +47,7 @@ const FOOTER_LINKS = {
 };
 
 const LOCATIONS = [
+  "Ibadan, Nigeria",
   "Lagos, Nigeria",
   "Abuja, Nigeria",
   "Port Harcourt, Nigeria",
