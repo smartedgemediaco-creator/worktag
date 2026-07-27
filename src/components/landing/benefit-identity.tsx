@@ -6,10 +6,10 @@ import Image from "next/image";
 import { Check, Link2, Smartphone, Mail } from "lucide-react";
 
 const TEAM_AVATARS = [
-  { src: "/images/avatars/chinedu.jpg", name: "Chinedu Okafor", role: "Gas Supplier", location: "Lagos", quote: "My customers scan my tag and instantly trust me." },
-  { src: "/images/avatars/aisha.jpg", name: "Aisha Bello", role: "Hair Stylist", location: "Abuja", quote: "WorkTag brought in clients who checked my profile first." },
-  { src: "/images/avatars/segun.jpg", name: "Segun Adeyemi", role: "Mobile Phone Technician", location: "Ibadan", quote: "My reviews speak for themselves now." },
-  { src: "/images/avatars/funke.jpg", name: "Funke Ogunlesi", role: "Catering & Events", location: "Lagos", quote: "One scan replaced all my business cards." },
+  { src: "/images/avatars/chinedu.jpg", name: "Chinedu Okafor", role: "Gas Supplier", location: "Lagos" },
+  { src: "/images/avatars/aisha.jpg", name: "Aisha Bello", role: "Hair Stylist", location: "Abuja" },
+  { src: "/images/avatars/segun.jpg", name: "Segun Adeyemi", role: "Mobile Phone Technician", location: "Ibadan" },
+  { src: "/images/avatars/emeka.jpg", name: "Emeka Nwosu", role: "Electrician", location: "Port Harcourt" },
 ];
 
 export function BenefitIdentity() {
@@ -31,7 +31,7 @@ export function BenefitIdentity() {
             {/* Left: Profile composition */}
             <motion.div style={{ y: parallaxY }} className="lg:col-span-6 order-2 lg:order-1">
               <div className="relative max-w-md mx-auto lg:mx-0">
-                {/* Main profile card */}
+                {/* Main profile card — the permanent WorkTag */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -39,71 +39,125 @@ export function BenefitIdentity() {
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="relative rounded-3xl overflow-hidden bg-white border border-white/10 shadow-[0_8px_40px_-8px_rgba(0,0,0,0.2)] p-6"
                 >
+                  {/* Header: photo + name + verification */}
                   <div className="flex items-start gap-4 mb-5">
                     <div className="relative shrink-0">
                       <div className="h-16 w-16 rounded-2xl overflow-hidden ring-2 ring-[#0241A8]/15">
-                        <Image src="/images/avatars/chinedu.jpg" alt="Chinedu Okafor" width={64} height={64} className="w-full h-full object-cover" />
+                        <Image src="/images/avatars/funke.jpg" alt="Funke Ogunlesi" width={64} height={64} className="w-full h-full object-cover" />
                       </div>
                       <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#10B981] flex items-center justify-center ring-[2.5px] ring-white">
                         <Check className="h-2.5 w-2.5 text-white stroke-[3]" />
                       </div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-[15px] font-bold text-[#090D1F] leading-tight">Chinedu Okafor</h3>
-                      <p className="text-[12px] text-[#5A6A8A] mt-0.5">Bright Masonry · Lagos</p>
+                      <h3 className="text-[15px] font-bold text-[#090D1F] leading-tight">Funke Ogunlesi</h3>
+                      <p className="text-[12px] text-[#5A6A8A] mt-0.5">Funke&apos;s Kitchen · Lagos</p>
                       <div className="flex items-center gap-1.5 mt-2">
                         <span className="inline-flex items-center gap-1 rounded-full bg-[#10B981]/10 px-2 py-0.5 text-[9px] font-bold text-[#10B981]">
                           <span className="w-1 h-1 rounded-full bg-[#10B981] animate-pulse" />
                           Verified
                         </span>
                         <span className="text-[9px] text-[#5A6A8A]/50">·</span>
-                        <span className="text-[9px] text-[#5A6A8A]/70 font-medium">ID: WT-204</span>
+                        <span className="text-[9px] text-[#5A6A8A]/70 font-medium">ID: WT-1087</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-2.5">
+                  {/* Trust Score */}
+                  <div className="space-y-2.5 mb-5">
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-[#5A6A8A] font-medium">Trust Score</span>
-                      <span className="text-[#10B981] font-bold">94/100</span>
+                      <span className="text-[#10B981] font-bold">97/100</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-[#E8EBF2]/60 overflow-hidden">
                       <motion.div
                         className="h-full rounded-full bg-gradient-to-r from-[#0241A8] to-[#06B6D4]"
                         initial={{ width: 0 }}
-                        whileInView={{ width: "94%" }}
+                        whileInView={{ width: "97%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       />
                     </div>
-                    <div className="flex items-center gap-4 pt-1">
-                      <span className="text-[10px] text-[#5A6A8A]/60">127 reviews</span>
-                      <span className="text-[10px] text-[#5A6A8A]/60">4.9 rating</span>
-                      <span className="text-[10px] text-[#5A6A8A]/60">3yr member</span>
+                  </div>
+
+                  {/* QR code — the main interaction */}
+                  <div className="flex justify-center mb-5">
+                    <div className="w-28 h-28 rounded-xl bg-white border border-[#E8EBF2]/80 p-2 shadow-[0_2px_12px_-2px_rgba(2,65,168,0.08)]">
+                      <Image src="/images/qr-worktag.webp" alt="Scan WorkTag" width={112} height={112} className="w-full h-full object-contain" />
+                    </div>
+                  </div>
+
+                  {/* Stats strip */}
+                  <div className="flex items-center justify-between border-t border-[#E8EBF2]/60 pt-3">
+                    <div className="text-center">
+                      <div className="text-[13px] font-bold text-[#090D1F]">4yr</div>
+                      <div className="text-[9px] text-[#5A6A8A]/60">Member</div>
+                    </div>
+                    <div className="w-px h-6 bg-[#E8EBF2]/60" />
+                    <div className="text-center">
+                      <div className="text-[13px] font-bold text-[#090D1F]">213</div>
+                      <div className="text-[9px] text-[#5A6A8A]/60">Reviews</div>
+                    </div>
+                    <div className="w-px h-6 bg-[#E8EBF2]/60" />
+                    <div className="text-center">
+                      <div className="text-[13px] font-bold text-[#090D1F]">4.9</div>
+                      <div className="text-[9px] text-[#5A6A8A]/60">Rating</div>
+                    </div>
+                    <div className="w-px h-6 bg-[#E8EBF2]/60" />
+                    <div className="text-center">
+                      <div className="text-[13px] font-bold text-[#0241A8]">worktag.io/funke</div>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Floating QR code */}
+                {/* Floating acrylic tag product */}
                 <motion.div
                   initial={{ opacity: 0, y: 20, rotate: -3 }}
                   whileInView={{ opacity: 1, y: 0, rotate: -3 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.3 }}
-                  className="absolute -bottom-6 -right-6 w-36 h-36 rounded-2xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5)] border border-white/[0.1] bg-white p-2 hidden sm:block"
+                  className="absolute -bottom-6 -right-6 w-40 h-24 rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5)] border border-white/[0.1] bg-gradient-to-br from-[#0241A8] to-[#012d7a] p-3 hidden sm:flex flex-col justify-between"
                 >
-                  <Image src="/images/qr-worktag.webp" alt="WorkTag QR Code" width={144} height={144} className="w-full h-full object-contain" />
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-md overflow-hidden">
+                      <Image src="/images/avatars/funke.jpg" alt="Funke" width={24} height={24} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <div className="text-[8px] font-bold text-white leading-tight">Funke Ogunlesi</div>
+                      <div className="text-[6px] text-white/50">Funke&apos;s Kitchen</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="text-[6px] text-white/40 font-medium">ID: WT-1087</div>
+                    <div className="h-5 w-5 rounded bg-white/10 flex items-center justify-center">
+                      <div className="h-3.5 w-3.5 bg-white rounded-sm" />
+                    </div>
+                  </div>
                 </motion.div>
 
-                {/* Floating storefront */}
+                {/* Floating PVC card */}
                 <motion.div
                   initial={{ opacity: 0, y: 20, rotate: 2 }}
                   whileInView={{ opacity: 1, y: 0, rotate: 2 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="absolute -top-4 -right-4 w-32 h-32 rounded-2xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5)] border border-white/[0.1] hidden sm:block"
+                  className="absolute -top-4 -right-4 w-36 h-20 rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5)] border border-white/[0.1] bg-gradient-to-br from-[#0241A8] to-[#012d7a] p-3 hidden sm:flex flex-col justify-between"
                 >
-                  <Image src="/images/avatars/chinedu.jpg" alt="Chinedu Okafor" width={128} height={128} className="w-full h-full object-cover" />
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-md overflow-hidden">
+                      <Image src="/images/avatars/funke.jpg" alt="Funke" width={24} height={24} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <div className="text-[8px] font-bold text-white leading-tight">Funke Ogunlesi</div>
+                      <div className="text-[6px] text-white/50">Catering & Events</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="text-[6px] text-[#FDC304] font-bold">Verified · 97/100</div>
+                    <div className="h-4 w-4 rounded bg-white/10 flex items-center justify-center">
+                      <div className="h-3 w-3 bg-white rounded-sm" />
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
@@ -148,7 +202,7 @@ export function BenefitIdentity() {
                   className="grid grid-cols-2 gap-2.5"
                 >
                   {[
-                    { icon: Link2, label: "Unique URL", desc: "worktag.io/chinedu" },
+                    { icon: Link2, label: "Unique URL", desc: "worktag.io/funke" },
                     { icon: Smartphone, label: "QR Scan", desc: "Any camera works" },
                     { icon: (props: React.SVGProps<SVGSVGElement>) => (
                       <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
