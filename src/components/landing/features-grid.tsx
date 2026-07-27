@@ -54,7 +54,7 @@ export function FeaturesGrid() {
               {/* Graphic Widget: Simulated rating card */}
               <div className="w-full md:w-[220px] rounded-2xl bg-gray-50 border border-gray-100 p-4 shrink-0 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#0A3D91] to-[#6366F1] flex items-center justify-center text-[10px] font-bold text-white">
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#0241A8] to-[#6366F1] flex items-center justify-center text-[10px] font-bold text-white">
                     WT
                   </div>
                   <div>
@@ -65,7 +65,7 @@ export function FeaturesGrid() {
                 <div className="space-y-1.5">
                   <div className="h-1.5 w-full rounded bg-gray-200 overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-[#0A3D91] to-[#6366F1]"
+                      className="h-full bg-gradient-to-r from-[#0241A8] to-[#6366F1]"
                       initial={{ width: 0 }}
                       whileInView={{ width: "95%" }}
                       viewport={{ once: true }}

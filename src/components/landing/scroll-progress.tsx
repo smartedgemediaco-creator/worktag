@@ -6,7 +6,7 @@ export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-[#C9D7FF] via-[#0A3D91] to-[#C9D7FF] z-[100] origin-left"
+      className="fixed top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-[#C9D7FF] via-[#0241A8] to-[#C9D7FF] z-[100] origin-left"
       style={{ scaleX: scrollYProgress, opacity: scrollYProgress }}
     />
   );

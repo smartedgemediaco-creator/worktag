@@ -68,28 +68,28 @@ export function BenefitReviews() {
 
   return (
     <section id="benefit-reviews" ref={sectionRef} className="relative bg-white py-28 sm:py-36 lg:py-44 overflow-hidden">
-      <div className="absolute inset-0 gradient-mesh opacity-20" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#F59E0B]/5 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 gradient-mesh opacity-15" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0241A8]/[0.03] rounded-full blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left: Content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="lg:col-span-5"
           >
-            <span className="text-[10px] font-bold tracking-[0.2em] text-[#6366F1] uppercase">
-              Benefit 04
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#0241A8] uppercase">
+              Reviews &amp; Reputation
             </span>
-            <h2 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-[900] leading-[1.05] tracking-[-0.03em] text-[#090D1F]">
+            <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.2rem)] font-[900] leading-[1.08] tracking-[-0.03em] text-[#090D1F]">
               Reviews that
               <br />
-              <span className="text-gradient-purple">actually matter.</span>
+              <span className="bg-gradient-to-r from-[#0241A8] to-[#3FA9F5] bg-clip-text text-transparent">actually matter.</span>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569] max-w-md">
+            <p className="mt-5 text-[15px] leading-[1.75] text-[#5A6A8A] max-w-md">
               Every review on WorkTag is tied to a real, verified interaction. No fake reviews. No paid testimonials. Just honest feedback from real customers.
             </p>
 
@@ -101,8 +101,8 @@ export function BenefitReviews() {
                 { value: "98%", label: "Positive" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-[900] text-[#090D1F]">{stat.value}</div>
-                  <div className="text-[11px] text-[#475569]/50 font-medium">{stat.label}</div>
+                  <div className="text-2xl font-[900] text-[#090D1F] tracking-tight">{stat.value}</div>
+                  <div className="text-[11px] text-[#5A6A8A]/60 font-medium mt-0.5">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -111,8 +111,8 @@ export function BenefitReviews() {
           {/* Right: Testimonial carousel */}
           <motion.div style={{ y: parallaxY }} className="lg:col-span-7">
             <div className="relative">
-              {/* Portrait grid background */}
-              <div className="absolute -inset-8 grid grid-cols-3 gap-3 opacity-[0.07] pointer-events-none">
+              {/* Subtle portrait grid background */}
+              <div className="absolute -inset-8 grid grid-cols-3 gap-3 opacity-[0.04] pointer-events-none">
                 {REVIEWS.map((r) => (
                   <div key={r.name} className="aspect-square rounded-2xl overflow-hidden">
                     <Image src={r.image} alt={r.name} width={200} height={200} className="w-full h-full object-cover" />
@@ -124,46 +124,44 @@ export function BenefitReviews() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <Quote className="h-8 w-8 text-[#6366F1]/20 mb-4" />
+                    <Quote className="h-7 w-7 text-[#0241A8]/15 mb-4" />
                     <p className="text-lg sm:text-xl leading-relaxed text-[#090D1F] font-medium">
                       &ldquo;{t.text}&rdquo;
                     </p>
 
                     <div className="mt-8 flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="portrait-ring">
-                          <div className="h-14 w-14 rounded-full overflow-hidden ring-2 ring-white">
-                            <Image src={t.image} alt={t.name} width={56} height={56} className="w-full h-full object-cover" />
-                          </div>
+                      <div className="flex items-center gap-3.5">
+                        <div className="h-12 w-12 rounded-full overflow-hidden ring-2 ring-white shadow-sm">
+                          <Image src={t.image} alt={t.name} width={48} height={48} className="w-full h-full object-cover" />
                         </div>
                         <div>
-                          <div className="text-sm font-bold text-[#090D1F]">{t.name}</div>
-                          <div className="text-xs text-[#475569]/50">{t.role}, {t.business}</div>
+                          <div className="text-[13px] font-bold text-[#090D1F]">{t.name}</div>
+                          <div className="text-[11px] text-[#5A6A8A]/60">{t.role}, {t.business}</div>
                           <div className="flex items-center gap-0.5 mt-1">
                             {Array.from({ length: t.rating }).map((_, i) => (
-                              <Star key={i} className="h-3 w-3 text-[#F59E0B] fill-[#F59E0B]" />
+                              <Star key={i} className="h-2.5 w-2.5 text-[#F59E0B] fill-[#F59E0B]" />
                             ))}
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <button
                           onClick={prev}
-                          className="h-9 w-9 rounded-full border border-[#E8EBF2] flex items-center justify-center text-[#475569]/50 hover:text-[#090D1F] hover:border-[#CBD5E1] transition-all duration-300"
+                          className="h-8 w-8 rounded-full border border-[#E2E8F0] flex items-center justify-center text-[#5A6A8A]/40 hover:text-[#090D1F] hover:border-[#CBD5E1] transition-all duration-300"
                         >
-                          <ChevronLeft className="h-4 w-4" />
+                          <ChevronLeft className="h-3.5 w-3.5" />
                         </button>
                         <button
                           onClick={next}
-                          className="h-9 w-9 rounded-full border border-[#E8EBF2] flex items-center justify-center text-[#475569]/50 hover:text-[#090D1F] hover:border-[#CBD5E1] transition-all duration-300"
+                          className="h-8 w-8 rounded-full border border-[#E2E8F0] flex items-center justify-center text-[#5A6A8A]/40 hover:text-[#090D1F] hover:border-[#CBD5E1] transition-all duration-300"
                         >
-                          <ChevronRight className="h-4 w-4" />
+                          <ChevronRight className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     </div>
@@ -177,7 +175,7 @@ export function BenefitReviews() {
                       key={i}
                       onClick={() => setActive(i)}
                       className={`h-1.5 rounded-full transition-all duration-500 ${
-                        i === active ? "w-6 bg-[#6366F1]" : "w-1.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
+                        i === active ? "w-6 bg-[#0241A8]" : "w-1.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
                       }`}
                     />
                   ))}

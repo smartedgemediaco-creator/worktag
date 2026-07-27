@@ -14,7 +14,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-gray-50">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-          <h1 className="text-lg font-bold text-[#0A3D91]">WorkTag</h1>
+          <h1 className="text-lg font-bold text-[#0241A8]">WorkTag</h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-500">{session.user.email}</span>
             <form action={async () => {
@@ -47,7 +47,7 @@ export default async function DashboardPage() {
             <p className="mt-1 text-sm text-gray-500">Set up your public work profile</p>
             <Link
               href={ROUTES.dashboard + "/profile"}
-              className="mt-4 inline-block text-sm font-medium text-[#0A3D91] hover:underline"
+              className="mt-4 inline-block text-sm font-medium text-[#0241A8] hover:underline"
             >
               Edit profile &rarr;
             </Link>
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
             <p className="mt-1 text-sm text-gray-500">Download and share your WorkTag QR</p>
             <Link
               href={ROUTES.dashboard + "/qr"}
-              className="mt-4 inline-block text-sm font-medium text-[#0A3D91] hover:underline"
+              className="mt-4 inline-block text-sm font-medium text-[#0241A8] hover:underline"
             >
               View QR &rarr;
             </Link>
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             <p className="mt-1 text-sm text-gray-500">Track profile views and engagement</p>
             <Link
               href={ROUTES.dashboard + "/analytics"}
-              className="mt-4 inline-block text-sm font-medium text-[#0A3D91] hover:underline"
+              className="mt-4 inline-block text-sm font-medium text-[#0241A8] hover:underline"
             >
               View analytics &rarr;
             </Link>

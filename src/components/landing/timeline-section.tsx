@@ -48,7 +48,7 @@ export function TimelineSection() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-xl"
         >
-          <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0A3D91] uppercase">
+          <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0241A8] uppercase">
             Your journey
           </span>
           <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#0F172A]">
@@ -73,7 +73,7 @@ export function TimelineSection() {
                 className="relative flex flex-col md:flex-row gap-6 md:gap-10"
               >
                 <div className="flex md:flex-col items-center md:items-start gap-4 md:w-48 shrink-0">
-                  <span className="relative z-10 inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-white border border-[#E2E8F0]/60 text-xs font-bold text-[#0A3D91]">
+                  <span className="relative z-10 inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-white border border-[#E2E8F0]/60 text-xs font-bold text-[#0241A8]">
                     {item.phase}
                   </span>
                   <span className="text-[10px] font-semibold tracking-[0.15em] text-[#475569]/30 uppercase hidden md:block">

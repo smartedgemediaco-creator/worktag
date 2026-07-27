@@ -123,7 +123,7 @@ export function ParticleIdentity() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(10,61,145,${o * pulse})`;
+            ctx.strokeStyle = `rgba(2,65,168,${o * pulse})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }

@@ -256,7 +256,7 @@ export function MegaNav() {
               </Link>
               <Link
                 href="/register"
-                className="hidden lg:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0A3D91] to-[#6366F1] px-5.5 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:shadow-[0_8px_24px_-4px_rgba(99,102,241,0.4)] hover:-translate-y-[1px] active:translate-y-0"
+                className="hidden lg:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-5.5 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:shadow-[0_8px_24px_-4px_rgba(99,102,241,0.4)] hover:-translate-y-[1px] active:translate-y-0"
               >
                 <Zap className="h-3.5 w-3.5" />
                 Get Started Free
@@ -303,7 +303,7 @@ export function MegaNav() {
                           : "Everything you need to get started with WorkTag."}
                       </p>
                     </div>
-                    <div className="mt-6 rounded-2xl overflow-hidden bg-gradient-to-br from-[#0A3D91] to-[#6366F1] p-5 text-white">
+                    <div className="mt-6 rounded-2xl overflow-hidden bg-gradient-to-br from-[#0241A8] to-[#6366F1] p-5 text-white">
                       <Shield className="h-6 w-6 mb-3 opacity-80" />
                       <p className="text-xs font-bold mb-1">Enterprise Trust</p>
                       <p className="text-[11px] text-white/70 leading-relaxed">
@@ -432,7 +432,7 @@ export function MegaNav() {
                 </Link>
                 <Link
                   href="/register"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0A3D91] to-[#6366F1] px-6 py-3.5 text-sm font-bold text-white w-full"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-6 py-3.5 text-sm font-bold text-white w-full"
                   onClick={() => setMobileOpen(false)}
                 >
                   <Zap className="h-4 w-4" />

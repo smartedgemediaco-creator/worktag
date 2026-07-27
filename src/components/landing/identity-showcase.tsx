@@ -26,7 +26,7 @@ export function IdentityShowcase() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0A3D91] uppercase">Professional profile</span>
+          <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0241A8] uppercase">Professional profile</span>
           <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#0F172A]">
             What customers see when they scan.
           </h2>
@@ -43,10 +43,10 @@ export function IdentityShowcase() {
           className="mt-20 sm:mt-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
         >
           <motion.div variants={fadeUp} className="flex-1 w-full max-w-lg">
-            <div className="rounded-3xl bg-white border border-[#E2E8F0]/20 shadow-[0_20px_60px_-20px_rgba(10,61,145,0.08)] transition-all duration-500 hover:shadow-[0_30px_80px_-20px_rgba(10,61,145,0.12)]">
+            <div className="rounded-3xl bg-white border border-[#E2E8F0]/20 shadow-[0_20px_60px_-20px_rgba(2,65,168,0.08)] transition-all duration-500 hover:shadow-[0_30px_80px_-20px_rgba(2,65,168,0.12)]">
               <div className="p-8 sm:p-10 space-y-6">
                 <div className="flex items-start gap-5">
-                  <div className="h-16 w-16 shrink-0 rounded-full bg-gradient-to-br from-[#0A3D91] to-[#2563EB] flex items-center justify-center text-white font-bold text-xl shadow-inner shadow-black/10 ring-2 ring-[#C9D7FF]/30">
+                  <div className="h-16 w-16 shrink-0 rounded-full bg-gradient-to-br from-[#0241A8] to-[#2563EB] flex items-center justify-center text-white font-bold text-xl shadow-inner shadow-black/10 ring-2 ring-[#C9D7FF]/30">
                     BM
                   </div>
                   <div className="min-w-0 flex-1">
@@ -83,7 +83,7 @@ export function IdentityShowcase() {
 
                 <div className="flex flex-wrap gap-2">
                   {["Bricklaying", "General Repairs", "Finishing Works", "Consultation"].map((s) => (
-                    <span key={s} className="rounded-lg bg-[#F8FAFC]/80 px-3.5 py-1.5 text-sm font-medium text-[#475569] border border-[#E2E8F0]/30 transition-all duration-300 hover:bg-[#F0F4FF] hover:border-[#C9D7FF]/50 hover:text-[#0A3D91]">
+                    <span key={s} className="rounded-lg bg-[#F8FAFC]/80 px-3.5 py-1.5 text-sm font-medium text-[#475569] border border-[#E2E8F0]/30 transition-all duration-300 hover:bg-[#F0F4FF] hover:border-[#C9D7FF]/50 hover:text-[#0241A8]">
                       {s}
                     </span>
                   ))}
@@ -117,17 +117,17 @@ export function IdentityShowcase() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex-1 flex flex-col gap-6 w-full max-w-sm">
-            <div className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0]/20 shadow-sm transition-all duration-500 hover:shadow-[0_20px_60px_-20px_rgba(10,61,145,0.1)] group">
+            <div className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0]/20 shadow-sm transition-all duration-500 hover:shadow-[0_20px_60px_-20px_rgba(2,65,168,0.1)] group">
               <Image src="/images/business-card.png" alt="WorkTag business card" width={600} height={400} className="object-cover w-full h-auto transition-transform duration-700 group-hover:scale-[1.02]" />
               <div className="px-5 py-3 text-[11px] text-[#475569]/40 font-medium flex items-center gap-2 bg-white">
-                <span className="w-1 h-1 rounded-full bg-[#0A3D91]/20" />
+                <span className="w-1 h-1 rounded-full bg-[#0241A8]/20" />
                 Premium business card with embedded WorkTag
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0]/20 shadow-sm transition-all duration-500 hover:shadow-[0_20px_60px_-20px_rgba(10,61,145,0.1)] group">
+            <div className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0]/20 shadow-sm transition-all duration-500 hover:shadow-[0_20px_60px_-20px_rgba(2,65,168,0.1)] group">
               <Image src="/images/window.png" alt="WorkTag on storefront window" width={600} height={400} className="object-cover w-full h-auto transition-transform duration-700 group-hover:scale-[1.02]" />
               <div className="px-5 py-3 text-[11px] text-[#475569]/40 font-medium flex items-center gap-2 bg-white">
-                <span className="w-1 h-1 rounded-full bg-[#0A3D91]/20" />
+                <span className="w-1 h-1 rounded-full bg-[#0241A8]/20" />
                 Storefront display · Scannable from the street
               </div>
             </div>

@@ -98,7 +98,7 @@ export function FAQSection() {
             <p className="mt-4 text-sm leading-relaxed text-[#475569] max-w-sm">
               Everything you need to know about WorkTag. Can&apos;t find what you&apos;re looking for? Contact our support team.
             </p>
-            <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#0A3D91] to-[#6366F1] p-6 text-white">
+            <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#0241A8] to-[#6366F1] p-6 text-white">
               <p className="text-xs font-bold mb-1">Still have questions?</p>
               <p className="text-[11px] text-white/70 mb-4">Our team is here to help you get started.</p>
               <a href="/contact" className="inline-flex items-center gap-2 text-xs font-bold text-white/90 hover:text-white transition-colors">

@@ -82,7 +82,7 @@ export function ParticleAura() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(10,61,145,${o})`;
+            ctx.strokeStyle = `rgba(2,65,168,${o})`;
             ctx.lineWidth = 0.3;
             ctx.stroke();
           }
@@ -92,7 +92,7 @@ export function ParticleAura() {
       for (const p of parts) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(10,61,145,${p.o})`;
+        ctx.fillStyle = `rgba(2,65,168,${p.o})`;
         ctx.fill();
       }
 

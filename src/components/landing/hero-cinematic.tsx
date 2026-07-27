@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { Shield, MapPin, Star, Check, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { Shield, MapPin, Star, Check, ArrowRight, Zap, ExternalLink } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -14,15 +14,6 @@ const fadeUp = {
     transition: { duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   }),
 };
-
-const floatingImages = [
-  { src: "/images/avatars/chinedu.jpg", alt: "Chinedu", className: "absolute top-[15%] left-[5%] w-16 h-16 rounded-2xl object-cover shadow-xl", delay: 0 },
-  { src: "/images/avatars/aisha.jpg", alt: "Aisha", className: "absolute top-[25%] right-[8%] w-14 h-14 rounded-full object-cover shadow-xl", delay: 0.5 },
-  { src: "/images/avatars/funke.jpg", alt: "Funke", className: "absolute bottom-[20%] left-[8%] w-12 h-12 rounded-xl object-cover shadow-xl", delay: 1 },
-  { src: "/images/avatars/ngozi.jpg", alt: "Ngozi", className: "absolute bottom-[30%] right-[5%] w-14 h-14 rounded-2xl object-cover shadow-xl", delay: 1.5 },
-  { src: "/images/avatars/segun.jpg", alt: "Segun", className: "absolute top-[45%] left-[2%] w-10 h-10 rounded-full object-cover shadow-xl", delay: 2 },
-  { src: "/images/avatars/tunde.jpg", alt: "Tunde", className: "absolute top-[60%] right-[3%] w-12 h-12 rounded-xl object-cover shadow-xl", delay: 0.8 },
-];
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -45,17 +36,252 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
     const increment = target / (duration / 16);
     const timer = setInterval(() => {
       start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
+      if (start >= target) { setCount(target); clearInterval(timer); }
+      else setCount(Math.floor(start));
     }, 16);
     return () => clearInterval(timer);
   }, [inView, target]);
 
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
+}
+
+function PhoneMockup() {
+  const [scanPhase, setScanPhase] = useState<"idle" | "scanning" | "done">("idle");
+
+  const startScan = useCallback(() => {
+    setScanPhase("scanning");
+    setTimeout(() => setScanPhase("done"), 2200);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(startScan, 1800);
+    const loop = setInterval(startScan, 8000);
+    return () => { clearTimeout(timer); clearInterval(loop); };
+  }, [startScan]);
+
+  return (
+    <div className="relative w-full max-w-[320px] mx-auto lg:mx-0">
+      {/* Ambient glow behind phone */}
+      <div className="absolute -inset-16 bg-gradient-to-br from-[#0241A8]/20 via-[#3FA9F5]/10 to-[#06B6D4]/10 rounded-[3rem] blur-[60px] opacity-60" />
+
+      {/* Phone frame */}
+      <div className="relative rounded-[2.5rem] bg-[#1a1a2e] p-[10px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.05)]">
+        {/* Screen */}
+        <div className="relative rounded-[2rem] overflow-hidden bg-[#0a0e1a] aspect-[9/19.5]">
+          {/* Status bar */}
+          <div className="absolute top-0 left-0 right-0 h-11 z-20 flex items-center justify-between px-7">
+            <span className="text-[10px] font-semibold text-white/50">9:41</span>
+            <div className="flex items-center gap-1">
+              <div className="w-4 h-2.5 rounded-[3px] border border-white/30 relative">
+                <div className="absolute inset-[1px] rounded-[1.5px] bg-white/40" />
+              </div>
+            </div>
+          </div>
+
+          {/* Dynamic Island / Notch */}
+          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-black z-30" />
+
+          {/* Screen content */}
+          <div className="absolute inset-0 pt-11">
+            <AnimatePresence mode="wait">
+              {scanPhase === "idle" && (
+                <motion.div
+                  key="qr"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-gradient-to-b from-[#0a0e1a] via-[#0d1225] to-[#0a0e1a]"
+                >
+                  <div className="relative w-44 h-44 rounded-2xl bg-white p-3 shadow-[0_0_60px_rgba(99,102,241,0.15)]">
+                    <Image src="/images/qr-worktag.webp" alt="WorkTag QR" width={160} height={160} className="w-full h-full object-contain" />
+                    {/* Corner marks */}
+                    <div className="absolute top-1.5 left-1.5 w-4 h-4 border-t-2 border-l-2 border-[#0241A8]" />
+                    <div className="absolute top-1.5 right-1.5 w-4 h-4 border-t-2 border-r-2 border-[#0241A8]" />
+                    <div className="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-2 border-l-2 border-[#0241A8]" />
+                    <div className="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-2 border-r-2 border-[#0241A8]" />
+                  </div>
+                  <div className="mt-6 text-center">
+                    <p className="text-xs font-bold text-white/70 tracking-wide">Scan with any camera</p>
+                    <p className="text-[10px] text-white/30 mt-1">No app needed</p>
+                  </div>
+                  {/* Tap to scan hint */}
+                  <motion.button
+                    onClick={startScan}
+                    whileTap={{ scale: 0.95 }}
+                    className="mt-8 px-5 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-[11px] font-semibold text-white/50 hover:text-white/70 hover:bg-white/[0.1] transition-all"
+                  >
+                    Tap to preview scan
+                  </motion.button>
+                </motion.div>
+              )}
+
+              {scanPhase === "scanning" && (
+                <motion.div
+                  key="scanning"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 flex items-center justify-center bg-[#0a0e1a]"
+                >
+                  <div className="relative w-52 h-52">
+                    {/* Camera viewfinder */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-[#10B981]/40 overflow-hidden bg-[#0d1225]">
+                      {/* Scan line */}
+                      <motion.div
+                        className="absolute left-2 right-2 h-[2px] bg-gradient-to-r from-transparent via-[#10B981] to-transparent shadow-[0_0_20px_#10B981,0_0_40px_rgba(16,185,129,0.3)]"
+                        initial={{ top: "5%" }}
+                        animate={{ top: ["5%", "90%", "5%"] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                      {/* Corner brackets */}
+                      <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-[#10B981] rounded-tl-lg" />
+                      <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#10B981] rounded-tr-lg" />
+                      <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#10B981] rounded-bl-lg" />
+                      <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-[#10B981] rounded-br-lg" />
+                      {/* Grid overlay */}
+                      <div className="absolute inset-8 grid grid-cols-3 grid-rows-3 gap-px opacity-20">
+                        {Array.from({ length: 9 }).map((_, i) => (
+                          <div key={i} className="border border-[#10B981]/30" />
+                        ))}
+                      </div>
+                    </div>
+                    <motion.div
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                      <span className="text-[11px] font-semibold text-[#10B981]">Scanning...</span>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+
+              {scanPhase === "done" && (
+                <motion.div
+                  key="profile"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] to-[#0d1225] overflow-hidden"
+                >
+                  {/* Verified header bar */}
+                  <div className="flex items-center justify-between px-5 pt-3 pb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                      <span className="text-[10px] font-bold text-[#10B981] uppercase tracking-wider">Verified Profile</span>
+                    </div>
+                    <ExternalLink className="h-3 w-3 text-white/20" />
+                  </div>
+
+                  <div className="px-5">
+                    {/* Profile header */}
+                    <div className="flex items-center gap-3.5 py-4 border-b border-white/[0.06]">
+                      <div className="relative">
+                        <div className="w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-[#0241A8]/30">
+                          <Image src="/images/avatars/chinedu.jpg" alt="Chinedu" width={56} height={56} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#10B981] flex items-center justify-center ring-2 ring-[#0a0e1a]">
+                          <Check className="h-2.5 w-2.5 text-white stroke-[3]" />
+                        </div>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <h3 className="text-sm font-bold text-white truncate">Chinedu Okafor</h3>
+                        </div>
+                        <p className="text-[11px] text-white/40 flex items-center gap-1 mt-0.5">
+                          <MapPin className="h-2.5 w-2.5 shrink-0" />
+                          Bright Masonry, Lagos
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Trust score bar */}
+                    <div className="py-3.5 border-b border-white/[0.06]">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">Trust Score</span>
+                        <span className="text-sm font-black text-white">94<span className="text-[10px] font-normal text-white/30">/100</span></span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-[#0241A8] to-[#10B981]"
+                          initial={{ width: 0 }}
+                          animate={{ width: "94%" }}
+                          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Quick stats */}
+                    <div className="grid grid-cols-3 gap-2 py-3.5 border-b border-white/[0.06]">
+                      {[
+                        { value: "127", label: "Reviews" },
+                        { value: "4.9", label: "Rating", icon: true },
+                        { value: "3yr", label: "Member" },
+                      ].map((stat) => (
+                        <div key={stat.label} className="text-center">
+                          <div className="text-sm font-black text-white flex items-center justify-center gap-0.5">
+                            {stat.value}
+                            {stat.icon && <Star className="h-2.5 w-2.5 text-[#F59E0B] fill-[#F59E0B]" />}
+                          </div>
+                          <div className="text-[9px] text-white/30 font-medium mt-0.5">{stat.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Reviews preview */}
+                    <div className="py-3.5">
+                      <div className="flex items-center justify-between mb-2.5">
+                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">Recent Reviews</span>
+                      </div>
+                      <div className="space-y-2.5">
+                        {[
+                          { name: "Adaeze K.", text: "Very professional. Fixed my wall same day.", stars: 5 },
+                          { name: "Bola M.", text: "Excellent masonry work. Highly recommend.", stars: 5 },
+                        ].map((review, i) => (
+                          <motion.div
+                            key={review.name}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.5 + i * 0.15 }}
+                            className="rounded-xl bg-white/[0.03] border border-white/[0.05] p-2.5"
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[10px] font-bold text-white/60">{review.name}</span>
+                              <div className="flex gap-0.5">
+                                {Array.from({ length: review.stars }).map((_, j) => (
+                                  <Star key={j} className="h-2 w-2 text-[#F59E0B] fill-[#F59E0B]" />
+                                ))}
+                              </div>
+                            </div>
+                            <p className="text-[10px] text-white/30 leading-relaxed">{review.text}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Scan again */}
+                  <motion.button
+                    onClick={() => setScanPhase("idle")}
+                    className="absolute bottom-5 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.08] text-[10px] font-semibold text-white/40 hover:text-white/60 transition-colors"
+                  >
+                    Scan another
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Home indicator */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-white/20 z-20" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function HeroCinematic() {
@@ -65,38 +291,18 @@ export function HeroCinematic() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.92]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const imagesY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-
-  const [bizName, setBizName] = useState("Bright Masonry");
-  const [isVerified, setIsVerified] = useState(true);
 
   return (
     <section ref={sectionRef} className="relative min-h-[100vh] overflow-hidden bg-[#050816]">
-      {/* Animated background layers */}
+      {/* Background */}
       <motion.div style={{ y: heroY }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#050816] via-[#0a0f1e] to-[#0f172a]" />
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#6366F1]/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#06B6D4]/8 rounded-full blur-[100px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#8B5CF6]/5 rounded-full blur-[150px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050816] via-[#080d1e] to-[#0a1024]" />
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-[-10%] left-[20%] w-[700px] h-[700px] bg-[#0241A8]/[0.1] rounded-full blur-[150px]" />
+          <div className="absolute bottom-[-10%] right-[15%] w-[600px] h-[600px] bg-[#06B6D4]/[0.05] rounded-full blur-[130px]" />
         </div>
-        <div className="absolute inset-0 cyber-grid opacity-20" />
-        <div className="absolute inset-0 dot-grid opacity-10" />
-      </motion.div>
-
-      {/* Floating portrait images */}
-      <motion.div style={{ y: imagesY }} className="absolute inset-0 z-[1] pointer-events-none">
-        {floatingImages.map((img, i) => (
-          <motion.div
-            key={img.alt}
-            className={img.className}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.25, scale: 1 }}
-            transition={{ duration: 1.2, delay: 1 + img.delay }}
-          >
-            <Image src={img.src} alt={img.alt} width={80} height={80} className="w-full h-full object-cover rounded-[inherit]" />
-          </motion.div>
-        ))}
+        <div className="absolute inset-0 cyber-grid opacity-[0.06]" />
+        <div className="absolute inset-0 dot-grid opacity-[0.04]" />
       </motion.div>
 
       {/* Grid overlay */}
@@ -107,36 +313,35 @@ export function HeroCinematic() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left: Copy */}
             <motion.div style={{ y: textY }} className="lg:col-span-6 xl:col-span-5">
-              <div className="space-y-7">
+              <div className="space-y-8">
                 <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible">
-                  <span className="inline-flex items-center gap-2.5 rounded-full bg-[#6366F1]/[0.12] border border-[#6366F1]/[0.15] px-4 py-2 text-[10px] font-bold tracking-[0.2em] text-[#818CF8]">
-                    <span className="relative flex h-2 w-2">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[#10B981]/[0.08] border border-[#10B981]/[0.12] px-3.5 py-1.5 text-[10px] font-bold tracking-[0.15em] text-[#10B981]">
+                    <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inset-0 rounded-full bg-[#10B981] animate-ping opacity-40" />
-                      <span className="relative rounded-full bg-[#10B981] w-2 h-2" />
+                      <span className="relative rounded-full bg-[#10B981] w-1.5 h-1.5" />
                     </span>
                     DIGITAL TRUST INFRASTRUCTURE
                   </span>
                 </motion.div>
 
                 <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
-                  <h1 className="text-[clamp(2.8rem,6vw,5.5rem)] font-[900] leading-[0.92] tracking-[-0.04em] text-white text-shadow-hero">
+                  <h1 className="text-[clamp(2.6rem,5.5vw,4.8rem)] font-[900] leading-[0.94] tracking-[-0.035em] text-white text-shadow-hero">
                     Your life&rsquo;s work.
                     <br />
-                    <span className="bg-gradient-to-r from-[#818CF8] via-[#6366F1] to-[#06B6D4] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#3FA9F5] via-[#0241A8] to-[#06B6D4] bg-clip-text text-transparent">
                       Verified forever.
                     </span>
                   </h1>
                 </motion.div>
 
-                <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" className="text-base sm:text-lg leading-relaxed text-[#94A3B8] max-w-lg">
-                  WorkTag gives every professional a trusted, immutable digital footprint.
-                  One QR code. Instant verification. A reputation that follows you everywhere.
+                <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" className="text-[15px] sm:text-base leading-[1.7] text-[#8896B3] max-w-[420px]">
+                  WorkTag gives every professional a trusted, immutable digital footprint. One QR code. Instant verification. A reputation that follows you everywhere.
                 </motion.p>
 
-                <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap items-center gap-4 pt-2">
+                <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap items-center gap-3 pt-1">
                   <Link
                     href="/register"
-                    className="group relative inline-flex h-13 items-center gap-2.5 rounded-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] px-8 text-[13px] font-bold text-white transition-all duration-300 hover:shadow-[0_12px_40px_rgba(99,102,241,0.4)] hover:-translate-y-[1px] active:translate-y-0"
+                    className="group relative inline-flex h-12 items-center gap-2 rounded-full bg-[#0241A8] px-7 text-[13px] font-bold text-white transition-all duration-300 hover:shadow-[0_12px_40px_rgba(2,65,168,0.4)] hover:-translate-y-px"
                   >
                     <Zap className="h-4 w-4" />
                     Claim your WorkTag
@@ -144,140 +349,42 @@ export function HeroCinematic() {
                   </Link>
                   <Link
                     href="#how-it-works"
-                    className="group inline-flex h-13 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 text-[13px] font-bold text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white backdrop-blur-sm"
+                    className="inline-flex h-12 items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-6 text-[13px] font-semibold text-white/60 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.06] hover:text-white/80"
                   >
-                    <Play className="h-3.5 w-3.5" />
                     See how it works
                   </Link>
                 </motion.div>
 
-                {/* Trust metrics strip */}
-                <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="flex items-center gap-8 pt-6 border-t border-white/[0.06]">
+                {/* Trust metrics */}
+                <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="flex items-center gap-7 pt-6 border-t border-white/[0.05]">
                   <div>
-                    <div className="text-xl font-extrabold text-white"><Counter target={10000} suffix="+" /></div>
-                    <div className="text-[11px] text-[#64748B] font-medium">Verified businesses</div>
+                    <div className="text-lg font-extrabold text-white tracking-tight"><Counter target={10000} suffix="+" /></div>
+                    <div className="text-[11px] text-[#5A6A8A] font-medium mt-0.5">Verified businesses</div>
                   </div>
-                  <div className="w-px h-8 bg-white/10" />
+                  <div className="w-px h-7 bg-white/[0.07]" />
                   <div>
-                    <div className="text-xl font-extrabold text-white"><Counter target={98} suffix="%" /></div>
-                    <div className="text-[11px] text-[#64748B] font-medium">Trust rating</div>
+                    <div className="text-lg font-extrabold text-white tracking-tight"><Counter target={98} suffix="%" /></div>
+                    <div className="text-[11px] text-[#5A6A8A] font-medium mt-0.5">Trust rating</div>
                   </div>
-                  <div className="w-px h-8 bg-white/10" />
+                  <div className="w-px h-7 bg-white/[0.07]" />
                   <div>
-                    <div className="text-xl font-extrabold text-white flex items-center gap-1">
-                      4.9 <Star className="h-4 w-4 text-[#F59E0B] fill-[#F59E0B]" />
+                    <div className="text-lg font-extrabold text-white tracking-tight flex items-center gap-1">
+                      4.9 <Star className="h-3.5 w-3.5 text-[#F59E0B] fill-[#F59E0B]" />
                     </div>
-                    <div className="text-[11px] text-[#64748B] font-medium">Avg. review</div>
+                    <div className="text-[11px] text-[#5A6A8A] font-medium mt-0.5">Avg. review</div>
                   </div>
                 </motion.div>
               </div>
             </motion.div>
 
-            {/* Right: Live WorkTag Card */}
+            {/* Right: Phone mockup */}
             <motion.div
-              initial={{ opacity: 0, x: 60, rotateY: -5 }}
-              animate={{ opacity: 1, x: 0, rotateY: 0 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-end"
             >
-              <div className="relative w-full max-w-[480px]">
-                {/* Glow backdrop */}
-                <div className="absolute -inset-10 bg-gradient-to-br from-[#6366F1]/20 via-[#8B5CF6]/10 to-[#06B6D4]/15 rounded-[3rem] blur-[60px] animate-hero-glow" />
-
-                <div className="relative rounded-3xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl p-6 animate-hero-glow">
-                  {/* Interactive controls */}
-                  <div className="mb-5 p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06] space-y-3">
-                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] text-[#818CF8] uppercase">
-                      <Sparkles className="h-3.5 w-3.5" />
-                      Live WorkTag Preview
-                    </div>
-                    <div className="flex gap-3">
-                      <div className="flex-1 space-y-1">
-                        <label className="text-[10px] font-semibold text-[#64748B]">Business Name</label>
-                        <input
-                          type="text"
-                          value={bizName}
-                          onChange={(e) => setBizName(e.target.value.slice(0, 24))}
-                          className="w-full text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#6366F1]/50 placeholder:text-white/20"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
-                      <span className="text-[10px] font-semibold text-[#64748B]">Verified status</span>
-                      <button
-                        onClick={() => setIsVerified(!isVerified)}
-                        className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ${
-                          isVerified ? "bg-[#10B981]" : "bg-white/20"
-                        }`}
-                      >
-                        <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                          isVerified ? "translate-x-4" : "translate-x-0"
-                        }`} />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Simulated profile card */}
-                  <motion.div
-                    whileHover={{ y: -4, rotateX: 2, rotateY: -1 }}
-                    transition={{ duration: 0.4 }}
-                    className="rounded-2xl bg-white/[0.06] border border-white/[0.08] p-5 backdrop-blur-sm"
-                  >
-                    <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 mb-4">
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#818CF8] uppercase">WorkTag Verified</span>
-                      <span className="text-[9px] text-[#64748B] font-semibold bg-white/5 px-2 py-0.5 rounded-full">ID: WT-204</span>
-                    </div>
-
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="h-14 w-14 shrink-0 rounded-2xl bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center text-white font-black text-base shadow-lg ring-2 ring-[#6366F1]/20">
-                        {bizName.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase() || "WT"}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-bold text-white tracking-tight truncate max-w-[180px]">{bizName}</h3>
-                          {isVerified ? (
-                            <span className="inline-flex items-center justify-center rounded-full bg-[#10B981]/15 p-0.5 text-[#10B981]">
-                              <Check className="h-3 w-3 stroke-[3]" />
-                            </span>
-                          ) : (
-                            <span className="text-[8px] font-semibold bg-white/10 text-white/40 px-1.5 py-0.5 rounded">Unverified</span>
-                          )}
-                        </div>
-                        <p className="text-[10px] text-[#64748B] font-medium flex items-center gap-1 mt-1">
-                          <MapPin className="h-3 w-3 text-[#64748B]/60 shrink-0" />
-                          Lagos, Nigeria
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* QR Scanner preview */}
-                    <div className="relative aspect-square w-[200px] mx-auto overflow-hidden rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center p-3 mb-4">
-                      <Image src="/images/qr-worktag.webp" alt="WorkTag QR Code" width={160} height={160} className="object-contain w-full h-full opacity-90" priority />
-                      <motion.div
-                        className="absolute left-[8%] right-[8%] h-[2px] bg-[#10B981]/80 shadow-[0_0_12px_#10B981]"
-                        animate={{ top: ["8%", "92%"] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 pt-3 border-t border-white/[0.06] text-center">
-                      <div>
-                        <div className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">Trust Score</div>
-                        <div className="text-xl font-extrabold text-white tracking-tight mt-0.5">
-                          {isVerified ? "96" : "45"}<span className="text-[10px] font-normal text-[#64748B]">/100</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">Rating</div>
-                        <div className="text-xl font-extrabold text-white tracking-tight mt-0.5 flex items-center justify-center gap-1">
-                          <Star className="h-4 w-4 text-[#F59E0B] fill-[#F59E0B]" />
-                          {isVerified ? "4.9" : "3.2"}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
+              <PhoneMockup />
             </motion.div>
           </div>
         </div>
@@ -287,22 +394,16 @@ export function HeroCinematic() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
+        transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] font-bold tracking-[0.2em] text-white/30 uppercase">Scroll to explore</span>
-          <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1">
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-2 rounded-full bg-white/40"
-            />
-          </div>
+          <span className="text-[9px] font-bold tracking-[0.25em] text-white/20 uppercase">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
         </motion.div>
       </motion.div>
     </section>

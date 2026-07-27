@@ -32,7 +32,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
 
-  --color-worktag-blue: #0A3D91;
+  --color-worktag-blue: #0241A8;
   --color-worktag-navy: #0F172A;
   --color-worktag-secondary: #3FA9F5;
   --color-worktag-light: #C9D7FF;
@@ -47,7 +47,7 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
 
-  --glow-blue: 0 0 24px rgba(10, 61, 145, 0.2), 0 0 48px rgba(10, 61, 145, 0.12);
+  --glow-blue: 0 0 24px rgba(2, 65, 168, 0.2), 0 0 48px rgba(2, 65, 168, 0.12);
   --glow-indigo: 0 0 24px rgba(99, 102, 241, 0.25), 0 0 48px rgba(99, 102, 241, 0.15);
   --glow-cyan: 0 0 24px rgba(6, 182, 212, 0.25), 0 0 48px rgba(6, 182, 212, 0.15);
 }
@@ -59,7 +59,7 @@
   --card-foreground: #090D1F;
   --popover: #FFFFFF;
   --popover-foreground: #090D1F;
-  --primary: #0A3D91;
+  --primary: #0241A8;
   --primary-foreground: #FFFFFF;
   --secondary: #F4F6FA;
   --secondary-foreground: #090D1F;
@@ -120,7 +120,7 @@
   }
 
   .text-gradient-blue {
-    background: linear-gradient(135deg, #0A3D91, #6366F1);
+    background: linear-gradient(135deg, #0241A8, #6366F1);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -134,7 +134,7 @@
   }
 
   .text-gradient-cyber {
-    background: linear-gradient(135deg, #0A3D91 0%, #6366F1 35%, #06B6D4 70%, #F59E0B 100%);
+    background: linear-gradient(135deg, #0241A8 0%, #6366F1 35%, #06B6D4 70%, #F59E0B 100%);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -188,7 +188,7 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(10, 61, 145, 0.1), rgba(63, 169, 245, 0.05), rgba(201, 215, 255, 0.15), rgba(10, 61, 145, 0.1));
+    background: linear-gradient(135deg, rgba(2, 65, 168, 0.1), rgba(63, 169, 245, 0.05), rgba(201, 215, 255, 0.15), rgba(2, 65, 168, 0.1));
     background-size: 300% 300%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -206,7 +206,7 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, #0A3D91, #3FA9F5, #C9D7FF, #0A3D91);
+    background: linear-gradient(135deg, #0241A8, #3FA9F5, #C9D7FF, #0241A8);
     background-size: 300% 300%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -238,15 +238,15 @@
 
   .cyber-grid {
     background-image:
-      linear-gradient(rgba(10, 61, 145, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 61, 145, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(2, 65, 168, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(2, 65, 168, 0.03) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .cyber-grid-subtle {
     background-image:
-      linear-gradient(rgba(10, 61, 145, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 61, 145, 0.02) 1px, transparent 1px);
+      linear-gradient(rgba(2, 65, 168, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(2, 65, 168, 0.02) 1px, transparent 1px);
     background-size: 64px 64px;
   }
 
@@ -260,7 +260,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(10, 61, 145, 0.15), rgba(63, 169, 245, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(2, 65, 168, 0.15), rgba(63, 169, 245, 0.1), transparent);
     animation: scan-move 4s ease-in-out infinite;
     pointer-events: none;
     z-index: 1;
@@ -268,7 +268,7 @@
 
   .shadow-card {
     box-shadow:
-      0 0 0 1px rgba(10, 61, 145, 0.04),
+      0 0 0 1px rgba(2, 65, 168, 0.04),
       0 1px 2px rgba(0, 0, 0, 0.02),
       0 4px 12px rgba(0, 0, 0, 0.02),
       0 12px 40px rgba(0, 0, 0, 0.02);
@@ -276,10 +276,10 @@
 
   .shadow-cyber {
     box-shadow:
-      0 0 0 1px rgba(10, 61, 145, 0.06),
+      0 0 0 1px rgba(2, 65, 168, 0.06),
       0 4px 12px rgba(0, 0, 0, 0.02),
-      0 12px 40px rgba(10, 61, 145, 0.04),
-      0 0 20px rgba(10, 61, 145, 0.06);
+      0 12px 40px rgba(2, 65, 168, 0.04),
+      0 0 20px rgba(2, 65, 168, 0.06);
   }
 
   .shadow-cyber-hover {
@@ -287,28 +287,28 @@
   }
   .shadow-cyber-hover:hover {
     box-shadow:
-      0 0 0 1px rgba(10, 61, 145, 0.08),
+      0 0 0 1px rgba(2, 65, 168, 0.08),
       0 8px 24px rgba(0, 0, 0, 0.03),
-      0 24px 48px rgba(10, 61, 145, 0.06),
-      0 0 40px rgba(10, 61, 145, 0.08),
-      0 0 80px rgba(10, 61, 145, 0.04);
+      0 24px 48px rgba(2, 65, 168, 0.06),
+      0 0 40px rgba(2, 65, 168, 0.08),
+      0 0 80px rgba(2, 65, 168, 0.04);
   }
 
   .shadow-product {
     box-shadow:
-      0 0 0 1px rgba(10, 61, 145, 0.06),
+      0 0 0 1px rgba(2, 65, 168, 0.06),
       0 2px 4px rgba(0, 0, 0, 0.02),
       0 8px 24px rgba(0, 0, 0, 0.03),
       0 24px 48px rgba(0, 0, 0, 0.03),
-      0 48px 80px rgba(10, 61, 145, 0.04);
+      0 48px 80px rgba(2, 65, 168, 0.04);
   }
 
   .shadow-elevated {
     box-shadow:
-      0 0 0 1px rgba(10, 61, 145, 0.06),
+      0 0 0 1px rgba(2, 65, 168, 0.06),
       0 4px 12px rgba(0, 0, 0, 0.03),
       0 12px 40px rgba(0, 0, 0, 0.04),
-      0 30px 80px rgba(10, 61, 145, 0.06);
+      0 30px 80px rgba(2, 65, 168, 0.06);
   }
 
   .glow-blue {
@@ -374,8 +374,8 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(10, 61, 145, 0.1), 0 0 40px rgba(10, 61, 145, 0.05); }
-  50% { box-shadow: 0 0 30px rgba(10, 61, 145, 0.2), 0 0 60px rgba(10, 61, 145, 0.1), 0 0 100px rgba(10, 61, 145, 0.05); }
+  0%, 100% { box-shadow: 0 0 20px rgba(2, 65, 168, 0.1), 0 0 40px rgba(2, 65, 168, 0.05); }
+  50% { box-shadow: 0 0 30px rgba(2, 65, 168, 0.2), 0 0 60px rgba(2, 65, 168, 0.1), 0 0 100px rgba(2, 65, 168, 0.05); }
 }
 
 @keyframes float-3d {
@@ -510,7 +510,7 @@
   }
 
   .benefit-gradient-1 {
-    background: linear-gradient(135deg, #090D1F 0%, #0c1a3d 30%, #0f2557 60%, #0A3D91 100%);
+    background: linear-gradient(135deg, #090D1F 0%, #0c1a3d 30%, #0f2557 60%, #0241A8 100%);
   }
 
   .benefit-gradient-2 {

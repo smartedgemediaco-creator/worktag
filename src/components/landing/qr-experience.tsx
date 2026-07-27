@@ -34,7 +34,7 @@ export function QRExperience() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 space-y-6 max-w-md"
           >
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0A3D91] uppercase">
+            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0241A8] uppercase">
               QR Experience
             </span>
             <h2 className="text-[clamp(2rem,3.5vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#0F172A]">

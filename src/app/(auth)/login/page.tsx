@@ -53,7 +53,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0A3D91] focus:outline-none focus:ring-2 focus:ring-[#0A3D91]/20"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0241A8] focus:outline-none focus:ring-2 focus:ring-[#0241A8]/20"
           />
         </div>
 
@@ -68,14 +68,14 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0A3D91] focus:outline-none focus:ring-2 focus:ring-[#0A3D91]/20"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0241A8] focus:outline-none focus:ring-2 focus:ring-[#0241A8]/20"
           />
         </div>
 
         <div className="flex items-center justify-end">
           <Link
             href={ROUTES.forgotPassword}
-            className="text-xs text-gray-500 hover:text-[#0A3D91]"
+            className="text-xs text-gray-500 hover:text-[#0241A8]"
           >
             Forgot password?
           </Link>
@@ -84,7 +84,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-[#0A3D91] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0A3D91]/90 disabled:opacity-50"
+          className="w-full rounded-lg bg-[#0241A8] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0241A8]/90 disabled:opacity-50"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
@@ -92,7 +92,7 @@ export default function LoginPage() {
 
       <p className="text-center text-sm text-gray-500">
         Don&apos;t have an account?{" "}
-        <Link href={ROUTES.register} className="font-semibold text-[#0A3D91] hover:underline">
+        <Link href={ROUTES.register} className="font-semibold text-[#0241A8] hover:underline">
           Create one
         </Link>
       </p>

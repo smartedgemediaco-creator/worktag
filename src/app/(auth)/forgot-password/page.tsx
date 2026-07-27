@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
         </p>
         <Link
           href={ROUTES.login}
-          className="inline-block text-sm font-semibold text-[#0A3D91] hover:underline"
+          className="inline-block text-sm font-semibold text-[#0241A8] hover:underline"
         >
           Back to sign in
         </Link>
@@ -71,21 +71,21 @@ export default function ForgotPasswordPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0A3D91] focus:outline-none focus:ring-2 focus:ring-[#0A3D91]/20"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0241A8] focus:outline-none focus:ring-2 focus:ring-[#0241A8]/20"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-[#0A3D91] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0A3D91]/90 disabled:opacity-50"
+          className="w-full rounded-lg bg-[#0241A8] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0241A8]/90 disabled:opacity-50"
         >
           {loading ? "Sending..." : "Send reset link"}
         </button>
       </form>
 
       <p className="text-center text-sm text-gray-500">
-        <Link href={ROUTES.login} className="font-semibold text-[#0A3D91] hover:underline">
+        <Link href={ROUTES.login} className="font-semibold text-[#0241A8] hover:underline">
           Back to sign in
         </Link>
       </p>

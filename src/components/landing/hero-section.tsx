@@ -77,7 +77,7 @@ export function HeroSection() {
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/register"
-                className="group relative inline-flex h-11.5 items-center justify-center rounded-full bg-gradient-to-r from-[#0A3D91] to-[#6366F1] px-7 text-xs font-bold text-white transition-all duration-300 hover:shadow-[0_12px_36px_rgba(99,102,241,0.35)] hover:-translate-y-[1px] active:translate-y-0"
+                className="group relative inline-flex h-11.5 items-center justify-center rounded-full bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-7 text-xs font-bold text-white transition-all duration-300 hover:shadow-[0_12px_36px_rgba(99,102,241,0.35)] hover:-translate-y-[1px] active:translate-y-0"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Claim your WorkTag
@@ -167,7 +167,7 @@ export function HeroSection() {
 
               {/* Business Info Layout */}
               <div className="flex items-start gap-4 mb-4">
-                <div className="h-12 w-12 shrink-0 rounded-full bg-gradient-to-br from-[#0A3D91] to-[#6366F1] flex items-center justify-center text-white font-black text-sm shadow-md ring-2 ring-[#6366F1]/20">
+                <div className="h-12 w-12 shrink-0 rounded-full bg-gradient-to-br from-[#0241A8] to-[#6366F1] flex items-center justify-center text-white font-black text-sm shadow-md ring-2 ring-[#6366F1]/20">
                   {bizName.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase() || "WT"}
                 </div>
                 <div className="min-w-0 flex-1">

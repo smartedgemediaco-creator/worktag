@@ -28,7 +28,7 @@ export function CTASection() {
           <div className="flex items-center justify-center gap-3">
             <Link
               href="/register"
-              className="relative inline-flex h-12 items-center justify-center rounded-[10px] bg-[#0A3D91] px-7 text-sm font-semibold text-white shadow-lg shadow-[#0A3D91]/15 transition-all duration-300 hover:shadow-xl hover:shadow-[#0A3D91]/25 hover:-translate-y-[0.5px] active:translate-y-0"
+              className="relative inline-flex h-12 items-center justify-center rounded-[10px] bg-[#0241A8] px-7 text-sm font-semibold text-white shadow-lg shadow-[#0241A8]/15 transition-all duration-300 hover:shadow-xl hover:shadow-[#0241A8]/25 hover:-translate-y-[0.5px] active:translate-y-0"
             >
               Create your WorkTag
             </Link>

@@ -11,7 +11,7 @@ export default function NotFound() {
       </p>
       <Link
         href={ROUTES.home}
-        className="mt-6 rounded-lg bg-[#0A3D91] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0A3D91]/90"
+        className="mt-6 rounded-lg bg-[#0241A8] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0241A8]/90"
       >
         Go home
       </Link>

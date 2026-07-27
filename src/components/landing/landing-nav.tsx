@@ -104,7 +104,7 @@ export function LandingNav() {
           </Link>
           <Link
             href="/register"
-            className="relative inline-flex h-8 items-center justify-center rounded-full bg-gradient-to-r from-[#0A3D91] to-[#6366F1] px-4.5 text-xs font-bold text-white transition-all duration-300 hover:shadow-[0_8px_20px_-4px_rgba(99,102,241,0.4)] hover:-translate-y-[0.5px] active:translate-y-0"
+            className="relative inline-flex h-8 items-center justify-center rounded-full bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-4.5 text-xs font-bold text-white transition-all duration-300 hover:shadow-[0_8px_20px_-4px_rgba(99,102,241,0.4)] hover:-translate-y-[0.5px] active:translate-y-0"
           >
             <span className="relative z-10">Get started</span>
           </Link>

@@ -92,7 +92,7 @@ export function HowItWorks() {
                   </div>
 
                   <div className="mt-6 flex gap-4 items-start relative z-10 bg-white pt-2">
-                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#0A3D91] to-[#6366F1] text-xs font-extrabold text-white shrink-0 shadow-[0_4px_12px_rgba(99,102,241,0.25)]">
+                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#0241A8] to-[#6366F1] text-xs font-extrabold text-white shrink-0 shadow-[0_4px_12px_rgba(99,102,241,0.25)]">
                       {step.number}
                     </span>
                     <div className="min-w-0">

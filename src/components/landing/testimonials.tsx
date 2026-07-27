@@ -88,14 +88,14 @@ export function Testimonials() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-sm shrink-0"
           >
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0A3D91] uppercase">Trusted by professionals</span>
+            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#0241A8] uppercase">Trusted by professionals</span>
             <h2 className="mt-4 text-[clamp(1.8rem,3vw,2.8rem)] font-bold leading-[1.08] tracking-[-0.03em] text-[#0F172A]">
               How industry leaders <br className="hidden sm:block" />
               are building with WorkTag
             </h2>
             <Link
               href="/stories"
-              className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0A3D91] transition-all duration-300 hover:gap-3"
+              className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0241A8] transition-all duration-300 hover:gap-3"
             >
               More customer stories
               <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
@@ -106,7 +106,7 @@ export function Testimonials() {
 
           <div className="flex-1 w-full max-w-2xl">
             <div className="relative">
-              <div className="rounded-2xl bg-white border border-[#E2E8F0]/20 shadow-[0_10px_40px_-15px_rgba(10,61,145,0.08)] p-8 sm:p-10">
+              <div className="rounded-2xl bg-white border border-[#E2E8F0]/20 shadow-[0_10px_40px_-15px_rgba(2,65,168,0.08)] p-8 sm:p-10">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -138,7 +138,7 @@ export function Testimonials() {
                       </div>
                       <Link
                         href="#"
-                        className="group inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A3D91] transition-all duration-300 hover:gap-2"
+                        className="group inline-flex items-center gap-1.5 text-xs font-semibold text-[#0241A8] transition-all duration-300 hover:gap-2"
                       >
                         Read the story
                         <svg viewBox="0 0 16 16" className="h-3 w-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
@@ -158,7 +158,7 @@ export function Testimonials() {
                       onClick={() => setActive(i)}
                       className={`h-1.5 rounded-full transition-all duration-500 ${
                         i === active
-                          ? "w-6 bg-[#0A3D91]"
+                          ? "w-6 bg-[#0241A8]"
                           : "w-1.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
                       }`}
                       aria-label={`Go to testimonial ${i + 1}`}
