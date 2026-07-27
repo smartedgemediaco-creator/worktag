@@ -14,6 +14,7 @@ import {
   PortfolioGallery,
   StatsBranded,
   FAQSection,
+  CTASection,
   MegaFooter,
 } from "@/components/landing";
 
@@ -36,6 +37,7 @@ export default function LandingPage() {
         <LifeTimeline />
         <PortfolioGallery />
         <FAQSection />
+        <CTASection />
       </main>
       <MegaFooter />
     </>

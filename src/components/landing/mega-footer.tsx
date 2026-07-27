@@ -63,37 +63,6 @@ export function MegaFooter() {
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#06B6D4]/3 rounded-full blur-[120px]" />
       </div>
 
-      {/* Top CTA strip */}
-      <div className="relative border-b border-white/[0.04]">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-12 sm:py-16">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="text-center lg:text-left">
-              <h3 className="text-2xl sm:text-3xl font-[900] text-white tracking-[-0.02em]">
-                Ready to build trust that lasts?
-              </h3>
-              <p className="text-sm text-white/40 mt-2 max-w-md">
-                Join 10,000+ professionals who use WorkTag to verify their identity and earn customer trust.
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/register"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:shadow-[0_12px_40px_rgba(99,102,241,0.4)] hover:-translate-y-[1px]"
-              >
-                Get Started Free
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-7 py-3.5 text-sm font-bold text-white/70 transition-all duration-300 hover:border-white/20 hover:text-white"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main footer content */}
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10 py-16 sm:py-20">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8">
