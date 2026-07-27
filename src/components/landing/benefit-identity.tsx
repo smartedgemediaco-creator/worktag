@@ -58,7 +58,7 @@ export function BenefitIdentity() {
                           Verified
                         </span>
                         <span className="text-[9px] text-[#5A6A8A]/50">·</span>
-                        <span className="text-[9px] text-[#5A6A8A]/70 font-medium">ID: WT-1087</span>
+                        <span className="text-[9px] text-[#5A6A8A]/70 font-medium">ID: WT-8F2K-9X4M</span>
                       </div>
                     </div>
                   </div>
@@ -128,7 +128,7 @@ export function BenefitIdentity() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="text-[6px] text-white/40 font-medium">ID: WT-1087</div>
+                    <div className="text-[6px] text-white/40 font-medium">ID: WT-8F2K-9X4M</div>
                     <div className="h-5 w-5 rounded bg-white/10 flex items-center justify-center">
                       <div className="h-3.5 w-3.5 bg-white rounded-sm" />
                     </div>

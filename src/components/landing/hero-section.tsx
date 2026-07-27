@@ -162,7 +162,7 @@ export function HeroSection() {
               {/* Header inside phone card */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
                 <span className="text-[9px] font-bold tracking-[0.2em] text-[#6366F1]/80 uppercase">WorkTag verified</span>
-                <span className="text-[9px] text-[#5C6479]/60 font-semibold bg-gray-50 px-2 py-0.5 rounded-full">ID: WT-204</span>
+                <span className="text-[9px] text-[#5C6479]/60 font-semibold bg-gray-50 px-2 py-0.5 rounded-full">ID: WT-7A3N-2P8L</span>
               </div>
 
               {/* Business Info Layout */}
