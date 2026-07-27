@@ -75,7 +75,7 @@ export function MegaFooter() {
                 <span className="text-[16px] font-bold text-white tracking-tight group-hover:text-[#818CF8] transition-colors">
                   WorkTag
                 </span>
-                <span className="text-[7px] font-bold tracking-[0.2em] text-[#6366F1]/50 uppercase">
+                <span className="text-[7px] font-bold tracking-[0.2em] text-[#FDC304]/40 uppercase">
                   by Afara Digital
                 </span>
               </div>
@@ -87,15 +87,15 @@ export function MegaFooter() {
             {/* Contact info */}
             <div className="space-y-2.5">
               <div className="flex items-center gap-2.5 text-xs text-white/30">
-                <Mail className="h-3.5 w-3.5 text-[#6366F1]/50" />
+                <Mail className="h-3.5 w-3.5 text-[#FDC304]/30" />
                 <span>hello@worktag.io</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-white/30">
-                <Phone className="h-3.5 w-3.5 text-[#6366F1]/50" />
+                <Phone className="h-3.5 w-3.5 text-[#FDC304]/30" />
                 <span>+234 (0) 800 WORKTAG</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-white/30">
-                <MapPin className="h-3.5 w-3.5 text-[#6366F1]/50" />
+                <MapPin className="h-3.5 w-3.5 text-[#FDC304]/30" />
                 <span>Lagos, Nigeria</span>
               </div>
             </div>
