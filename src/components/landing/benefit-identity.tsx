@@ -77,12 +77,50 @@ export function BenefitIdentity() {
 
                     {/* Screen */}
                     <div className="relative rounded-[2rem] overflow-hidden bg-white">
+                      {/* Scan line animation */}
+                      <motion.div
+                        className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FDC304] to-transparent z-20 pointer-events-none"
+                        initial={{ top: "0%" }}
+                        whileInView={{ top: ["0%", "100%", "0%"] }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
+                      />
+                      {/* Scan glow */}
+                      <motion.div
+                        className="absolute inset-x-0 h-16 z-20 pointer-events-none"
+                        style={{ background: "linear-gradient(to bottom, rgba(253,195,4,0.1), transparent)" }}
+                        initial={{ top: "-10%" }}
+                        whileInView={{ top: ["-10%", "100%", "-10%"] }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
+                      />
+
+                      {/* Card content — fades in after scan */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 2.0 }}
+                      >
                       {/* Status bar */}
                       <div className="flex items-center justify-between px-6 pt-7 pb-2 bg-[#0241A8]">
                         <span className="text-[10px] font-semibold text-white/60">9:41</span>
-                        <div className="flex items-center gap-1">
-                          <div className="h-2.5 w-3.5 rounded-[2px] border border-white/40" />
-                          <div className="h-2.5 w-2.5 rounded-[2px] border border-white/40" />
+                        <div className="flex items-center gap-1.5">
+                          {/* Signal bars */}
+                          <svg viewBox="0 0 18 12" className="h-2.5 w-3.5" fill="none">
+                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.6)"/>
+                            <rect x="4" y="6" width="3" height="6" rx="0.5" fill="rgba(255,255,255,0.6)"/>
+                            <rect x="8" y="3" width="3" height="9" rx="0.5" fill="rgba(255,255,255,0.6)"/>
+                            <rect x="12" y="0" width="3" height="12" rx="0.5" fill="rgba(255,255,255,0.6)"/>
+                          </svg>
+                          {/* 5G */}
+                          <span className="text-[8px] font-bold text-white/60">5G</span>
+                          {/* Battery */}
+                          <svg viewBox="0 0 28 13" className="h-2.5 w-5" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="12" rx="2.5" stroke="rgba(255,255,255,0.4)"/>
+                            <rect x="2" y="2" width="18" height="9" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+                            <path d="M25 4.5V8.5C25.8 8.5 26.5 7.8 26.5 7C26.5 6.2 25.8 4.5 25 4.5Z" fill="rgba(255,255,255,0.4)"/>
+                          </svg>
                         </div>
                       </div>
 
@@ -91,12 +129,11 @@ export function BenefitIdentity() {
                         {/* Brand mark + ID */}
                         <div className="flex items-center justify-between mb-5">
                           <div className="flex items-center gap-1.5">
-                            <div className="h-4 w-4 rounded-sm bg-white/10 flex items-center justify-center">
-                              <svg viewBox="0 0 1254 1254" fill="none" className="h-3 w-3">
-                                <path fill="#FDC304" d="M556.057129,742.076294 C501.786530,745.407104 459.961334,702.722351 464.173920,648.810547 C466.747742,615.871277 491.009644,586.103210 524.089355,575.297424 C554.953674,565.215271 590.627991,575.356140 612.173401,600.336243 C655.742371,650.850769 629.973145,727.492981 564.912292,740.842224 C562.145386,741.409973 559.309326,741.640442 556.057129,742.076294 Z" />
-                              </svg>
-                            </div>
-                            <span className="text-[8px] font-bold tracking-[0.25em] text-white/40 uppercase">WorkTag</span>
+                            <svg viewBox="0 0 1254 1254" fill="none" className="h-5 w-5">
+                              <path fill="#0241A8" d="M828.299744,120.640442 C868.475464,138.184631 908.303101,155.560715 948.102966,173.000244 C973.628723,184.185150 989.682861,203.267822 996.070068,230.505661 C1014.570007,309.397736 1033.110718,388.280334 1051.727783,467.144867 C1057.879395,493.204407 1057.520508,518.801086 1048.593628,544.335083 C1023.385742,616.437256 998.576721,688.678772 973.501099,760.827332 C934.798950,872.182556 895.953186,983.487854 857.274536,1094.851074 C839.357666,1146.437134 783.566467,1172.596069 732.067139,1154.290894 C591.882751,1104.463013 451.541351,1055.076782 311.264099,1005.510010 C301.700989,1002.130859 291.890411,999.301453 282.643250,995.204407 C236.153366,974.606750 213.536255,920.801392 227.682144,873.230164 C245.089554,814.690735 263.202667,756.360168 281.169098,697.988098 C302.924713,627.305298 324.787964,556.655457 346.723755,486.028320 C355.609558,457.418610 365.374664,429.069672 373.681183,400.296509 C379.874329,378.844055 391.553772,361.754639 409.407654,348.825104 C428.158844,335.245819 447.099792,321.921875 466.139771,308.749329 C522.705261,269.615326 579.340637,230.582138 635.988342,191.567032 C666.026306,170.878860 695.662781,149.554688 726.363098,129.895752 C758.186829,109.517433 792.566589,107.290932 828.299744,120.640442 Z"/>
+                              <path fill="#FDC304" d="M556.057129,742.076294 C501.786530,745.407104 459.961334,702.722351 464.173920,648.810547 C466.747742,615.871277 491.009644,586.103210 524.089355,575.297424 C554.953674,565.215271 590.627991,575.356140 612.173401,600.336243 C655.742371,650.850769 629.973145,727.492981 564.912292,740.842224 C562.145386,741.409973 559.309326,741.640442 556.057129,742.076294 Z"/>
+                            </svg>
+                            <span className="text-[9px] font-bold tracking-[0.2em] text-white/50">WorkTag</span>
                           </div>
                           <span className="text-[8px] font-medium text-white/25 tracking-wider">WT-8F2K-9X4M</span>
                         </div>
@@ -231,8 +268,9 @@ export function BenefitIdentity() {
                           </div>
                         </div>
                       </div>
+                      </motion.div>
 
-                      {/* Bottom bar */}
+                      {/* Bottom bar — always visible */}
                       <div className="bg-white border-t border-[#E8EBF2]/60 px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[8px] font-medium text-[#5A6A8A]/40">Member since 2022</span>
                         <span className="text-[8px] font-medium text-[#0241A8]/40">worktag.io/funke</span>
