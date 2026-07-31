@@ -60,6 +60,7 @@ const FOOTER_LINKS = {
   Platform: [
     { label: "How It Works", href: "#how-it-works" },
     { label: "Features", href: "#benefit-identity" },
+    { label: "Pricing", href: "#pricing" },
     { label: "QR Products", href: "#benefit-qr" },
     { label: "Trust Engine", href: "#benefit-trust" },
     { label: "Reviews", href: "#benefit-reviews" },
