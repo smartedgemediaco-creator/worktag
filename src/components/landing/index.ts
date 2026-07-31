@@ -10,6 +10,7 @@ export { BenefitVerification } from "./benefit-verification";
 export { BenefitStorefront } from "./benefit-storefront";
 export { LifeTimeline } from "./life-timeline";
 export { PortfolioGallery } from "./portfolio-gallery";
+export { PricingSection } from "./pricing-section";
 export { StatsBranded } from "./stats-branded";
 export { FAQSection } from "./faq-section";
 export { MegaFooter } from "./mega-footer";

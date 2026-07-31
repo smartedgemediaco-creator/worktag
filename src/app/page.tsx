@@ -11,6 +11,7 @@ import {
   BenefitStorefront,
   LifeTimeline,
   PortfolioGallery,
+  PricingSection,
   StatsBranded,
   FAQSection,
   CTASection,
@@ -34,6 +35,7 @@ export default function LandingPage() {
         <StatsBranded />
         <LifeTimeline />
         <PortfolioGallery />
+        <PricingSection />
         <FAQSection />
         <CTASection />
       </main>

@@ -99,6 +99,37 @@ const NAV_ITEMS: MegaMenuItem[] = [
     ],
   },
   {
+    label: "Pricing",
+    children: [
+      {
+        icon: Zap,
+        label: "14-Day Trial",
+        description: "Try Pro free for two weeks — no card required",
+        href: "#pricing",
+        badge: "Free",
+      },
+      {
+        icon: Sparkles,
+        label: "Pro",
+        description: "Everything you need to turn scans into customers",
+        href: "#pricing",
+        badge: "Popular",
+      },
+      {
+        icon: Briefcase,
+        label: "Business",
+        description: "Teams, multiple locations, and priority support",
+        href: "#pricing",
+      },
+      {
+        icon: TrendingUp,
+        label: "Compare Plans",
+        description: "Every feature, side by side",
+        href: "#pricing",
+      },
+    ],
+  },
+  {
     label: "Resources",
     children: [
       {
@@ -188,7 +219,7 @@ export function MegaNav() {
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <WorkTagMark className="h-7 w-7 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-105" />
               <div className="flex flex-col">
-                <span className={`text-[15px] font-bold tracking-tight leading-tight group-hover:text-[#0241A8] transition-colors ${scrolled ? "text-[#090D1F]" : "text-white"}`}>
+                <span className={`text-[15px] font-bold tracking-tight leading-tight transition-colors ${scrolled ? "text-[#090D1F] group-hover:text-[#0241A8]" : "text-white group-hover:text-[#FDC304]"}`}>
                   WorkTag
                 </span>
                 <span className={`text-[7px] font-bold tracking-[0.2em] uppercase transition-colors ${scrolled                   ? "text-[#0241A8]/60" : "text-white/40"}`}>
@@ -306,6 +337,8 @@ export function MegaNav() {
                           ? "The complete digital trust infrastructure for modern professionals."
                           : activeMenu === "Products"
                           ? "Premium physical products that connect the digital and physical worlds."
+                          : activeMenu === "Pricing"
+                          ? "Transparent plans that grow with your business. Start free, upgrade anytime."
                           : "Everything you need to get started with WorkTag."}
                       </p>
                     </div>
