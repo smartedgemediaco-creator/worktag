@@ -188,10 +188,10 @@ export function MegaNav() {
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <WorkTagMark className="h-7 w-7 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-105" />
               <div className="flex flex-col">
-                <span className={`text-[15px] font-bold tracking-tight leading-tight group-hover:text-[#6366F1] transition-colors ${scrolled ? "text-[#090D1F]" : "text-white"}`}>
+                <span className={`text-[15px] font-bold tracking-tight leading-tight group-hover:text-[#0241A8] transition-colors ${scrolled ? "text-[#090D1F]" : "text-white"}`}>
                   WorkTag
                 </span>
-                <span className={`text-[7px] font-bold tracking-[0.2em] uppercase transition-colors ${scrolled ? "text-[#6366F1]/50" : "text-white/40"}`}>
+                <span className={`text-[7px] font-bold tracking-[0.2em] uppercase transition-colors ${scrolled                   ? "text-[#0241A8]/60" : "text-white/40"}`}>
                   by Afara Digital
                 </span>
               </div>
@@ -208,7 +208,7 @@ export function MegaNav() {
                   <button
                     className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${
                       activeMenu === item.label
-                        ? "text-[#818CF8] bg-[#6366F1]/[0.06]"
+                        ? "text-[#0241A8] bg-[#0241A8]/[0.06]"
                         : scrolled
                           ? "text-[#475569] hover:text-[#090D1F] hover:bg-[#F4F6FA]"
                           : "text-white/80 hover:text-white hover:bg-white/[0.06]"
@@ -256,7 +256,11 @@ export function MegaNav() {
               </Link>
               <Link
                 href="/register"
-                className="hidden lg:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-5.5 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:shadow-[0_8px_24px_-4px_rgba(99,102,241,0.4)] hover:-translate-y-[1px] active:translate-y-0"
+                className={`hidden lg:inline-flex items-center gap-2 rounded-full px-5.5 py-2.5 text-[13px] font-bold transition-all duration-300 hover:-translate-y-[1px] active:translate-y-0 ${
+                  scrolled
+                    ? "bg-gradient-to-r from-[#0241A8] to-[#3FA9F5] text-white hover:shadow-[0_8px_24px_-4px_rgba(2,65,168,0.4)]"
+                    : "bg-white text-[#0241A8] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]"
+                }`}
               >
                 <Zap className="h-3.5 w-3.5" />
                 Get Started Free
@@ -286,13 +290,13 @@ export function MegaNav() {
               exit="exit"
               onMouseEnter={() => handleMouseEnter(activeMenu)}
               onMouseLeave={handleMouseLeave}
-              className="absolute inset-x-0 top-full mega-menu-panel shadow-[0_20px_60px_-10px_rgba(99,102,241,0.12)] border-t border-[#E8EBF2]/30"
+              className="absolute inset-x-0 top-full mega-menu-panel shadow-[0_20px_60px_-10px_rgba(2,65,168,0.12)] border-t border-[#E8EBF2]/30"
             >
               <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-8 lg:py-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                   <div className="lg:col-span-4 xl:col-span-3">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold tracking-[0.2em] text-[#6366F1]/60 uppercase">
+                      <span className="text-[10px] font-bold tracking-[0.2em] text-[#0241A8]/70 uppercase">
                         {activeMenu}
                       </span>
                       <p className="text-xs text-[#475569] leading-relaxed mt-2">
@@ -303,7 +307,7 @@ export function MegaNav() {
                           : "Everything you need to get started with WorkTag."}
                       </p>
                     </div>
-                    <div className="mt-6 rounded-2xl overflow-hidden bg-gradient-to-br from-[#0241A8] to-[#6366F1] p-5 text-white">
+                    <div className="mt-6 rounded-2xl overflow-hidden bg-gradient-to-br from-[#0241A8] to-[#3FA9F5] p-5 text-white">
                       <Shield className="h-6 w-6 mb-3 opacity-80" />
                       <p className="text-xs font-bold mb-1">Enterprise Trust</p>
                       <p className="text-[11px] text-white/70 leading-relaxed">
@@ -334,16 +338,16 @@ export function MegaNav() {
                               onClick={() => setActiveMenu(null)}
                               className="group flex items-start gap-3.5 rounded-xl p-3.5 transition-all duration-300 hover:bg-[#F4F6FA]/80"
                             >
-                              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#6366F1]/[0.07] text-[#6366F1] group-hover:bg-[#6366F1]/[0.12] transition-colors duration-300">
+                              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0241A8]/[0.07] text-[#0241A8] group-hover:bg-[#0241A8]/[0.12] transition-colors duration-300">
                                 <Icon className="h-4.5 w-4.5" />
                               </span>
                               <div className="min-w-0 flex-1">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-[13px] font-bold text-[#090D1F] group-hover:text-[#6366F1] transition-colors duration-300">
+                                  <span className="text-[13px] font-bold text-[#090D1F] group-hover:text-[#0241A8] transition-colors duration-300">
                                     {child.label}
                                   </span>
                                   {child.badge && (
-                                    <span className="rounded-full bg-[#6366F1]/10 px-2 py-0.5 text-[9px] font-bold text-[#6366F1] uppercase tracking-wider">
+                                    <span className="rounded-full bg-[#FDC304]/10 px-2 py-0.5 text-[9px] font-bold text-[#FDC304] uppercase tracking-wider">
                                       {child.badge}
                                     </span>
                                   )}
@@ -352,7 +356,7 @@ export function MegaNav() {
                                   {child.description}
                                 </p>
                               </div>
-                              <ArrowRight className="h-3.5 w-3.5 text-[#475569]/20 group-hover:text-[#6366F1] transition-all duration-300 group-hover:translate-x-0.5 shrink-0 mt-1" />
+                              <ArrowRight className="h-3.5 w-3.5 text-[#475569]/20 group-hover:text-[#0241A8] transition-all duration-300 group-hover:translate-x-0.5 shrink-0 mt-1" />
                             </Link>
                           </motion.div>
                         );
@@ -411,7 +415,7 @@ export function MegaNav() {
                                   onClick={() => setMobileOpen(false)}
                                   className="flex items-center gap-3 py-2.5 rounded-lg hover:bg-[#F4F6FA] transition-colors"
                                 >
-                                  <Icon className="h-4 w-4 text-[#6366F1]" />
+                                  <Icon className="h-4 w-4 text-[#0241A8]" />
                                   <span className="text-sm font-medium text-[#475569]">{child.label}</span>
                                 </Link>
                               );
@@ -432,7 +436,7 @@ export function MegaNav() {
                 </Link>
                 <Link
                   href="/register"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0241A8] to-[#6366F1] px-6 py-3.5 text-sm font-bold text-white w-full"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0241A8] to-[#3FA9F5] px-6 py-3.5 text-sm font-bold text-white w-full"
                   onClick={() => setMobileOpen(false)}
                 >
                   <Zap className="h-4 w-4" />

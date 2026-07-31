@@ -2,7 +2,6 @@ import { ScrollProgress } from "@/components/landing/scroll-progress";
 import {
   MegaNav,
   HeroCinematic,
-  TrustBar,
   HowItWorks,
   BenefitIdentity,
   BenefitQR,
@@ -25,7 +24,6 @@ export default function LandingPage() {
       <MegaNav />
       <main>
         <HeroCinematic />
-        <TrustBar />
         <HowItWorks />
         <BenefitIdentity />
         <BenefitQR />

@@ -5,9 +5,9 @@ export async function generateQR(data: Record<string, unknown>) {
   return {
     profileId,
     username,
-    url: `https://worktag.io/${username}`,
+    url: `https://worktag.com/${username}`,
     imageUrl: `/api/v1/qr/image/${username}`,
-    toJSON() { return { profileId, username, url: `https://worktag.io/${username}`, imageUrl: `/api/v1/qr/image/${username}` }; },
+    toJSON() { return { profileId, username, url: `https://worktag.com/${username}`, imageUrl: `/api/v1/qr/image/${username}` }; },
   };
 }
 
@@ -17,8 +17,8 @@ export async function getQRByProfileId(profileId: string) {
   return {
     profileId,
     username: profile.username,
-    url: `https://worktag.io/${profile.username}`,
+    url: `https://worktag.com/${profile.username}`,
     imageUrl: `/api/v1/qr/image/${profile.username}`,
-    toJSON() { return { profileId, username: profile.username, url: `https://worktag.io/${profile.username}`, imageUrl: `/api/v1/qr/image/${profile.username}` }; },
+    toJSON() { return { profileId, username: profile.username, url: `https://worktag.com/${profile.username}`, imageUrl: `/api/v1/qr/image/${profile.username}` }; },
   };
 }

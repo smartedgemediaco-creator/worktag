@@ -28,7 +28,7 @@ const STEPS = [
     title: "Collect Trust Signals",
     description:
       "Customers scan your tag to verify you instantly. Every review left on your tag builds a robust digital reputation verified on-chain.",
-    image: "/images/storefront.jpg",
+    image: "/images/testimonials/ngozi.jpg",
     tag: "Build Trust",
     icon: Shield,
   },
@@ -46,9 +46,9 @@ const stepItem = {
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative bg-white py-32 sm:py-40 overflow-hidden">
-      <div className="gradient-mesh absolute inset-0 pointer-events-none opacity-30" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,#C9D7FF/8_0%,transparent_100%)] pointer-events-none" />
+    <section id="how-it-works" className="relative bg-white py-28 sm:py-36 lg:py-40 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,#C9D7FF/25_0%,transparent_65%)] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#3FA9F5]/20 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <motion.div
@@ -58,27 +58,31 @@ export function HowItWorks() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <span className="text-[10px] font-bold tracking-[0.2em] text-[#6366F1] uppercase">Workflow</span>
-          <h2 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-extrabold leading-[1.08] tracking-tight text-[#090D1F]">
-            Three steps to infinite trust.
+          <span className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] text-[#FDC304] uppercase">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#FDC304]" />
+            Workflow
+          </span>
+          <h2 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-[900] leading-[1.08] tracking-[-0.03em] text-[#090D1F]">
+            Three steps to
+            <span className="bg-gradient-to-r from-[#0241A8] via-[#3FA9F5] to-[#FDC304] bg-clip-text text-transparent"> infinite trust.</span>
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#5C6479] max-w-md">
+          <p className="mt-3 text-sm leading-relaxed text-[#5A6A8A] max-w-md">
             Setup takes less than five minutes. The professional trust you establish lasts forever.
           </p>
         </motion.div>
 
-        {/* Desktop Connecting Pipeline Line */}
+        {/* Connecting line */}
         <div className="relative mt-20 sm:mt-24">
-          <div className="absolute top-[30%] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-[#6366F1]/10 via-[#06B6D4]/30 to-[#8B5CF6]/10 hidden md:block" />
+          <div className="absolute top-[30%] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-[#0241A8]/15 via-[#3FA9F5]/30 to-[#FDC304]/20 hidden md:block" />
 
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-8"
+            className="grid gap-10 md:grid-cols-3 md:gap-6 lg:gap-10"
           >
-            {STEPS.map((step, i) => {
+            {STEPS.map((step) => {
               const Icon = step.icon;
               return (
                 <motion.div
@@ -86,22 +90,22 @@ export function HowItWorks() {
                   variants={stepItem}
                   className="group relative flex flex-col"
                 >
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm transition-all duration-500 group-hover:shadow-cyber group-hover:-translate-y-1 relative">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E8EBF2] bg-white shadow-[0_10px_30px_-12px_rgba(2,65,168,0.1)] transition-all duration-500 group-hover:shadow-[0_20px_50px_-20px_rgba(2,65,168,0.2)] group-hover:-translate-y-1">
                     <Image src={step.image} alt={step.title} width={600} height={450} className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.03]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090D1F]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur border border-[#E8EBF2] px-2.5 py-1 shadow-sm">
+                      <Icon className="h-3 w-3 text-[#FDC304]" />
+                      <span className="text-[9px] font-bold tracking-wider text-[#090D1F] uppercase">{step.tag}</span>
+                    </div>
                   </div>
 
-                  <div className="mt-6 flex gap-4 items-start relative z-10 bg-white pt-2">
-                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#0241A8] to-[#6366F1] text-xs font-extrabold text-white shrink-0 shadow-[0_4px_12px_rgba(99,102,241,0.25)]">
+                  <div className="mt-6 flex gap-4 items-start">
+                    <span className="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#0241A8] to-[#3FA9F5] text-sm font-[900] text-white shrink-0 shadow-[0_6px_16px_rgba(2,65,168,0.25)]">
                       {step.number}
                     </span>
                     <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 mb-1.5">
-                        <Icon className="h-3.5 w-3.5 text-[#6366F1] shrink-0" />
-                        <span className="text-[9px] font-bold tracking-wider text-[#6366F1]/70 uppercase">{step.tag}</span>
-                      </div>
                       <h3 className="text-sm font-bold text-[#090D1F] tracking-tight">{step.title}</h3>
-                      <p className="mt-2 text-xs leading-relaxed text-[#5C6479]">{step.description}</p>
+                      <p className="mt-2 text-xs leading-relaxed text-[#5A6A8A]">{step.description}</p>
                     </div>
                   </div>
                 </motion.div>

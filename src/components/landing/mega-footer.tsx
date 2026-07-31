@@ -104,7 +104,7 @@ export function MegaFooter() {
       <div className="absolute inset-0 cyber-grid opacity-5" />
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-[#0241A8]/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#06B6D4]/3 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#FDC304]/[0.04] rounded-full blur-[120px]" />
       </div>
 
       {/* Main footer content */}

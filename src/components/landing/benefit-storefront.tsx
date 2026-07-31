@@ -3,12 +3,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { ShoppingBag, Globe, CreditCard, Package, Star, ArrowRight, Sparkles, Store } from "lucide-react";
+import { ShoppingBag, Globe, CreditCard, Package, Star, ArrowRight, Sparkles, Store, ShoppingCart } from "lucide-react";
 
 const MOCK_PRODUCTS = [
-  { name: "Bricklaying Service", price: "₦45,000", rating: 4.9, reviews: 127, image: "/images/acrylic.png" },
-  { name: "General Repairs", price: "₦25,000", rating: 4.8, reviews: 89, image: "/images/pvc.png" },
-  { name: "Finishing Works", price: "₦65,000", rating: 5.0, reviews: 203, image: "/images/card stack.png" },
+  { name: "Bricklaying Service", price: "₦45,000", unit: "", rating: 4.9, reviews: 127, image: "/images/masonry-bricklaying.jpg", type: "service" as const },
+  { name: "Concrete Blocks", price: "₦550", unit: "per piece", rating: 4.9, reviews: 214, image: "/images/masonry-blocks.jpg", type: "product" as const },
+  { name: "General Repairs", price: "₦25,000", unit: "", rating: 4.8, reviews: 89, image: "/images/masonry-repairs.jpg", type: "service" as const },
+  { name: "Building Sand", price: "₦45,000", unit: "per tipper", rating: 4.9, reviews: 176, image: "/images/masonry-sand.jpg", type: "product" as const },
 ];
 
 export function BenefitStorefront() {
@@ -18,10 +19,10 @@ export function BenefitStorefront() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
-      <motion.div style={{ y: parallaxY }} className="absolute inset-0 bg-gradient-to-br from-[#0c0520] via-[#120a30] to-[#0a0f2e]" />
+      <motion.div style={{ y: parallaxY }} className="absolute inset-0 bg-gradient-to-br from-[#090D1F] via-[#0b1230] to-[#0a0f2e]" />
       <div className="absolute inset-0 cyber-grid opacity-[0.05]" />
       <div className="absolute inset-0">
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#F59E0B]/[0.04] rounded-full blur-[140px]" />
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#FDC304]/[0.04] rounded-full blur-[140px]" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#0241A8]/[0.06] rounded-full blur-[120px]" />
       </div>
 
@@ -35,14 +36,14 @@ export function BenefitStorefront() {
             transition={{ duration: 0.7 }}
             className="text-center max-w-2xl mx-auto mb-16 sm:mb-20"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/15 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.15em] text-[#FBBF24]">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#FDC304]/10 border border-[#FDC304]/15 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.15em] text-[#FDC304]">
               <Sparkles className="h-3 w-3" />
               EVOLVING PLATFORM
             </span>
             <h2 className="mt-5 text-[clamp(2rem,3.5vw,3.2rem)] font-[900] leading-[1.08] tracking-[-0.03em] text-white">
               Your business deserves
               <br />
-              <span className="bg-gradient-to-r from-[#FBBF24] via-[#F59E0B] to-[#EC4899] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#FDC304] via-[#3FA9F5] to-[#0241A8] bg-clip-text text-transparent">
                 its own storefront.
               </span>
             </h2>
@@ -62,12 +63,28 @@ export function BenefitStorefront() {
               className="lg:col-span-7"
             >
               <div className="relative">
-                <div className="absolute -inset-6 bg-gradient-to-br from-[#F59E0B]/[0.08] via-[#0241A8]/[0.06] to-[#EC4898]/[0.04] rounded-[2rem] blur-[40px]" />
+                <div className="absolute -inset-6 bg-gradient-to-br from-[#FDC304]/[0.08] via-[#0241A8]/[0.06] to-[#3FA9F5]/[0.04] rounded-[2rem] blur-[40px]" />
 
                 <div className="relative rounded-3xl overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl">
+                  {/* Store cover */}
+                  <div className="relative h-32 sm:h-36">
+                    <Image
+                      src="/images/masonry-finishing.jpg"
+                      alt="Bright Masonry storefront cover"
+                      width={900}
+                      height={600}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/40 to-transparent" />
+                    <span className="absolute top-3 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 px-3 py-1 text-[9px] font-bold text-white/90">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FDC304] animate-pulse" />
+                      worktag.com/bright-masonry
+                    </span>
+                  </div>
+
                   {/* Store header */}
-                  <div className="flex items-center gap-4 p-6 pb-0">
-                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#0241A8] to-[#3FA9F5] flex items-center justify-center text-white font-black text-base shadow-lg ring-2 ring-[#0241A8]/20">
+                  <div className="flex items-center gap-4 p-6 pb-0 -mt-10 relative">
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#0241A8] to-[#3FA9F5] flex items-center justify-center text-white font-black text-lg shadow-lg ring-4 ring-[#0a0f2e]">
                       BM
                     </div>
                     <div className="flex-1">
@@ -81,7 +98,7 @@ export function BenefitStorefront() {
                       <p className="text-[11px] text-white/40 mt-0.5">Home Services · Lagos, Nigeria</p>
                       <div className="flex items-center gap-3 mt-1.5">
                         <div className="flex items-center gap-0.5">
-                          <Star className="h-3 w-3 text-[#F59E0B] fill-[#F59E0B]" />
+                          <Star className="h-3 w-3 text-[#FDC304] fill-[#FDC304]" />
                           <span className="text-[11px] font-bold text-white/70">4.9</span>
                           <span className="text-[10px] text-white/30">(127 reviews)</span>
                         </div>
@@ -108,7 +125,7 @@ export function BenefitStorefront() {
                   </div>
 
                   {/* Product/Service cards */}
-                  <div className="grid sm:grid-cols-3 gap-3 p-6">
+                  <div className="grid sm:grid-cols-2 gap-3 p-6">
                     {MOCK_PRODUCTS.map((product, i) => (
                       <motion.div
                         key={product.name}
@@ -118,27 +135,34 @@ export function BenefitStorefront() {
                         transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
                         className="group rounded-xl bg-white/[0.04] border border-white/[0.06] overflow-hidden hover-lift"
                       >
-                        <div className="aspect-[4/3] bg-white/[0.02] flex items-center justify-center p-3">
+                        <div className="relative aspect-[4/3] bg-white/[0.02] overflow-hidden">
                           <Image
                             src={product.image}
                             alt={product.name}
-                            width={120}
-                            height={120}
-                            className="object-contain w-full h-full opacity-60 group-hover:opacity-80 transition-opacity"
+                            width={480}
+                            height={360}
+                            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.08]"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                          <span className="absolute top-2 left-2 rounded-full bg-black/40 backdrop-blur-md border border-white/15 px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white/90">
+                            {product.type === "service" ? "Service" : "For Sale"}
+                          </span>
                         </div>
                         <div className="p-3">
                           <h4 className="text-[11px] font-bold text-white mb-1">{product.name}</h4>
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-[900] text-[#FBBF24]">{product.price}</span>
+                            <span className="text-sm font-[900] text-[#FDC304]">
+                              {product.price}
+                              {product.unit && <span className="ml-1 text-[9px] font-bold text-white/35 normal-case">{product.unit}</span>}
+                            </span>
                             <div className="flex items-center gap-0.5">
-                              <Star className="h-2.5 w-2.5 text-[#F59E0B] fill-[#F59E0B]" />
+                              <Star className="h-2.5 w-2.5 text-[#FDC304] fill-[#FDC304]" />
                               <span className="text-[10px] text-white/40 font-bold">{product.rating}</span>
                             </div>
                           </div>
-                          <button className="mt-2 w-full flex items-center justify-center gap-1.5 rounded-lg bg-[#0241A8]/15 border border-[#0241A8]/25 py-1.5 text-[10px] font-bold text-[#3FA9F5] hover:bg-[#0241A8]/25 transition-colors">
-                            <ShoppingBag className="h-3 w-3" />
-                            Book Now
+                          <button className="mt-2 w-full flex items-center justify-center gap-1.5 rounded-lg bg-[#FDC304] py-1.5 text-[10px] font-bold text-[#090D1F] shadow-[0_6px_16px_-6px_rgba(253,195,4,0.5)] hover:bg-[#FDE047] transition-colors">
+                            {product.type === "service" ? <ShoppingBag className="h-3 w-3" /> : <ShoppingCart className="h-3 w-3" />}
+                            {product.type === "service" ? "Book Now" : "Buy Now"}
                           </button>
                         </div>
                       </motion.div>
@@ -154,7 +178,7 @@ export function BenefitStorefront() {
                 {
                   icon: Store,
                   title: "Your Branded Storefront",
-                  desc: "A custom URL for your business — worktag.io/your-name. Share it everywhere. It's your digital home base.",
+                  desc: "A custom URL for your business — worktag.com/your-name. Share it everywhere. It's your digital home base.",
                   color: "#0241A8",
                 },
                 {
@@ -195,7 +219,7 @@ export function BenefitStorefront() {
                     <div className="flex items-center gap-2">
                       <h3 className="text-[13px] font-bold text-white">{feature.title}</h3>
                       {feature.badge && (
-                        <span className="rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/15 px-2 py-0.5 text-[8px] font-bold text-[#FBBF24] uppercase tracking-wider">
+                        <span className="rounded-full bg-[#FDC304]/10 border border-[#FDC304]/15 px-2 py-0.5 text-[8px] font-bold text-[#FDC304] uppercase tracking-wider">
                           {feature.badge}
                         </span>
                       )}
@@ -211,14 +235,14 @@ export function BenefitStorefront() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="rounded-2xl bg-gradient-to-r from-[#F59E0B]/[0.04] via-[#EC4899]/[0.03] to-[#0241A8]/[0.04] border border-white/[0.04] p-5"
+                className="rounded-2xl bg-gradient-to-r from-[#FDC304]/[0.04] via-[#3FA9F5]/[0.03] to-[#0241A8]/[0.04] border border-white/[0.04] p-5"
               >
                 <p className="text-[12px] text-white/30 leading-relaxed">
                   <span className="text-white/50 font-bold">Something exciting is brewing.</span>{" "}
                   We&apos;re building tools that will make your WorkTag storefront even more powerful.
                   Stay tuned.
                 </p>
-                <div className="flex items-center gap-1.5 mt-3 text-[10px] font-bold text-[#FBBF24]/50">
+                <div className="flex items-center gap-1.5 mt-3 text-[10px] font-bold text-[#FDC304]/50">
                   <ArrowRight className="h-3 w-3" />
                   <span>The best is yet to come</span>
                 </div>

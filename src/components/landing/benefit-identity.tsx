@@ -52,7 +52,7 @@ export function BenefitIdentity() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
-  const profileUrl = "https://worktag.io/funke";
+  const profileUrl = "https://worktag.com/funke";
   const [qrOpen, setQrOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -84,11 +84,11 @@ export function BenefitIdentity() {
 
   return (
     <section id="benefit-identity" ref={sectionRef} className="relative overflow-hidden">
-      <div className="relative benefit-gradient-1 py-28 sm:py-36 lg:py-44">
+      <div className="relative bg-[#F7F9FC] py-28 sm:py-36 lg:py-44">
         <div className="absolute inset-0 cyber-grid opacity-[0.05]" />
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0241A8]/[0.08] rounded-full blur-[130px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#3FA9F5]/[0.05] rounded-full blur-[110px]" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#3FA9F5]/[0.05] rounded-full blur-[130px]" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDC304]/[0.04] rounded-full blur-[110px]" />
         </div>
 
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -428,7 +428,7 @@ export function BenefitIdentity() {
                         {/* Microtype */}
                         <div className="relative flex items-center justify-between px-1 pt-3.5">
                           <span className="text-[7px] font-semibold uppercase tracking-[0.12em] text-[#5A6A8A]/50">Member since 2022</span>
-                          <span className="text-[8px] font-medium text-[#0241A8]/50">worktag.io/funke</span>
+                          <span className="text-[8px] font-medium text-[#0241A8]/50">worktag.com/funke</span>
                         </div>
                       </div>
                     </div>
@@ -483,13 +483,13 @@ export function BenefitIdentity() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.7 }}
                 >
-                  <span className="text-[10px] font-bold tracking-[0.2em] text-[#3FA9F5] uppercase">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-[#0241A8] uppercase">
                     Digital Identity
                   </span>
-                  <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.2rem)] font-[900] leading-[1.08] tracking-[-0.03em] text-white">
+                  <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.2rem)] font-[900] leading-[1.08] tracking-[-0.03em] text-[#090D1F]">
                     A digital identity
                     <br />
-                    <span className="bg-gradient-to-r from-[#3FA9F5] to-[#06B6D4] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#0241A8] via-[#3FA9F5] to-[#FDC304] bg-clip-text text-transparent">
                       that never expires.
                     </span>
                   </h2>
@@ -518,11 +518,11 @@ export function BenefitIdentity() {
                     { step: "02", title: "Trust", desc: "Your verified profile builds instant credibility" },
                     { step: "03", title: "Connect", desc: "Clients contact you directly — WhatsApp, call, or hire" },
                   ].map((item) => (
-                    <div key={item.step} className="flex items-start gap-3.5 rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3">
-                      <span className="text-[10px] font-bold text-[#FDC304]/60 mt-0.5 shrink-0">{item.step}</span>
+                    <div key={item.step} className="flex items-start gap-3.5 rounded-xl bg-white border border-[#E8EBF2]/80 px-4 py-3 shadow-[0_4px_24px_-4px_rgba(2,65,168,0.06)]">
+                      <span className="text-[10px] font-bold text-[#C79A00] mt-0.5 shrink-0">{item.step}</span>
                       <div>
-                        <div className="text-[12px] font-bold text-white/80">{item.title}</div>
-                        <div className="text-[11px] text-white/35 leading-relaxed">{item.desc}</div>
+                        <div className="text-[12px] font-bold text-[#090D1F]">{item.title}</div>
+                        <div className="text-[11px] text-[#5A6A8A] leading-relaxed">{item.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -571,8 +571,8 @@ export function BenefitIdentity() {
                         </div>
                       ))}
                     </div>
-                    <span className="text-[12px] text-[#FDC304] font-medium">
-                      <span className="text-[#FDC304] font-bold">10,000+</span> professionals trust WorkTag
+                    <span className="text-[12px] text-[#5A6A8A] font-medium">
+                      <span className="text-[#C79A00] font-bold">10,000+</span> professionals trust WorkTag
                     </span>
                   </div>
                 </motion.div>
@@ -598,7 +598,7 @@ export function BenefitIdentity() {
           </div>
           <div className="mx-auto flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-1.5">
             <Link2 className="h-3.5 w-3.5 text-[#94A3B8]" />
-            <span className="text-[13px] font-semibold text-[#0F172A]">worktag.io/funke</span>
+            <span className="text-[13px] font-semibold text-[#0F172A]">worktag.com/funke</span>
           </div>
           <DialogFooter className="gap-2 sm:flex-row sm:justify-center">
             <Button variant="outline" onClick={copyLink} className="flex-1 gap-1.5">
