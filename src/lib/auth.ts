@@ -2,14 +2,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "@better-auth/prisma-adapter";
 import { prisma } from "./prisma";
 import { nextCookies } from "better-auth/next-js";
-import { Resend } from "resend";
 import { config } from "@/config";
-
-const resendApiKey = process.env.RESEND_API_KEY;
-const resendFrom =
-  process.env.RESEND_FROM ??
-  `no-reply@${new URL(process.env.NEXT_PUBLIC_APP_URL ?? process.env.BETTER_AUTH_URL ?? "http://localhost:3000").hostname}`;
-const resendClient = resendApiKey ? new Resend(resendApiKey) : undefined;
+import { getEmailProvider } from "@/infra";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -20,12 +14,11 @@ export const auth = betterAuth({
     autoSignIn: true,
     resetPasswordTokenExpiresIn: config.auth.resetTokenExpiry,
     sendResetPassword: async ({ user, url }) => {
-      if (!resendClient) {
-        console.warn("Missing RESEND_API_KEY — password reset emails disabled");
-        return;
-      }
-      await resendClient.emails.send({
-        from: resendFrom,
+      const from =
+        process.env.RESEND_FROM ??
+        `no-reply@${new URL(process.env.NEXT_PUBLIC_APP_URL ?? process.env.BETTER_AUTH_URL ?? "http://localhost:3000").hostname}`;
+      await getEmailProvider().send({
+        from,
         to: user.email,
         subject: "Reset your WorkTag password",
         html: `
