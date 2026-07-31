@@ -208,7 +208,9 @@ export function MegaNav() {
                   <button
                     className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${
                       activeMenu === item.label
-                        ? "text-[#0241A8] bg-[#0241A8]/[0.06]"
+                        ? scrolled
+                          ? "text-[#0241A8] bg-[#0241A8]/[0.06]"
+                          : "text-[#FDC304] bg-[#FDC304]/[0.12]"
                         : scrolled
                           ? "text-[#475569] hover:text-[#090D1F] hover:bg-[#F4F6FA]"
                           : "text-white/80 hover:text-white hover:bg-white/[0.06]"
