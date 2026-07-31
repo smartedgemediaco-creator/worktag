@@ -1,9 +1,12 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { Check, Clock, ShieldCheck, Smartphone, Mail, MapPin, UserCheck, Star, Copy, Share2, Link2 } from "lucide-react";
+import { WorkTagMark } from "./worktag-logo";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const TEAM_AVATARS = [
   { src: "/images/avatars/chinedu.jpg", name: "Chinedu Okafor", role: "Gas Supplier", location: "Lagos" },
@@ -49,6 +52,36 @@ export function BenefitIdentity() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
+  const profileUrl = "https://worktag.io/funke";
+  const [qrOpen, setQrOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(profileUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard unavailable */
+    }
+  };
+
+  const shareQr = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Funke Ogunlesi's WorkTag",
+          text: "Scan Funke's verified WorkTag profile",
+          url: profileUrl,
+        });
+        return;
+      } catch {
+        /* share dismissed */
+      }
+    }
+    await copyLink();
+  };
+
   return (
     <section id="benefit-identity" ref={sectionRef} className="relative overflow-hidden">
       <div className="relative benefit-gradient-1 py-28 sm:py-36 lg:py-44">
@@ -77,203 +110,326 @@ export function BenefitIdentity() {
 
                     {/* Screen */}
                     <div className="relative rounded-[2rem] overflow-hidden bg-white">
-                      {/* Scan line animation */}
-                      <motion.div
-                        className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FDC304] to-transparent z-20 pointer-events-none"
-                        initial={{ top: "0%" }}
-                        whileInView={{ top: ["0%", "100%", "0%"] }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
-                      />
-                      {/* Scan glow */}
-                      <motion.div
-                        className="absolute inset-x-0 h-16 z-20 pointer-events-none"
-                        style={{ background: "linear-gradient(to bottom, rgba(253,195,4,0.1), transparent)" }}
-                        initial={{ top: "-10%" }}
-                        whileInView={{ top: ["-10%", "100%", "-10%"] }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
-                      />
+                      {/* Scan viewfinder corner brackets */}
+                      <div className="absolute top-2.5 left-2.5 z-30 h-3.5 w-3.5 border-t-2 border-l-2 border-[#FDC304]/80 rounded-tl-sm pointer-events-none" />
+                      <div className="absolute top-2.5 right-2.5 z-30 h-3.5 w-3.5 border-t-2 border-r-2 border-[#FDC304]/80 rounded-tr-sm pointer-events-none" />
 
-                      {/* Card content — fades in after scan */}
+                      {/* Signature gold scan sweep on reveal */}
                       <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
+                        className="absolute inset-x-0 z-30 pointer-events-none"
+                        style={{ height: 64 }}
+                        initial={{ top: "-15%" }}
+                        whileInView={{ top: "102%" }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 2.0 }}
+                        transition={{ duration: 1.8, ease: "easeInOut", delay: 0.25 }}
                       >
-                      {/* Status bar */}
-                      <div className="flex items-center justify-between px-6 pt-7 pb-2 bg-[#0241A8]">
-                        <span className="text-[10px] font-semibold text-white/60">9:41</span>
-                        <div className="flex items-center gap-1.5">
-                          {/* Signal bars */}
-                          <svg viewBox="0 0 18 12" className="h-2.5 w-3.5" fill="none">
-                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.6)"/>
-                            <rect x="4" y="6" width="3" height="6" rx="0.5" fill="rgba(255,255,255,0.6)"/>
-                            <rect x="8" y="3" width="3" height="9" rx="0.5" fill="rgba(255,255,255,0.6)"/>
-                            <rect x="12" y="0" width="3" height="12" rx="0.5" fill="rgba(255,255,255,0.6)"/>
-                          </svg>
-                          {/* 5G */}
-                          <span className="text-[8px] font-bold text-white/60">5G</span>
-                          {/* Battery */}
-                          <svg viewBox="0 0 28 13" className="h-2.5 w-5" fill="none">
-                            <rect x="0.5" y="0.5" width="23" height="12" rx="2.5" stroke="rgba(255,255,255,0.4)"/>
-                            <rect x="2" y="2" width="18" height="9" rx="1.5" fill="rgba(255,255,255,0.6)"/>
-                            <path d="M25 4.5V8.5C25.8 8.5 26.5 7.8 26.5 7C26.5 6.2 25.8 4.5 25 4.5Z" fill="rgba(255,255,255,0.4)"/>
-                          </svg>
-                        </div>
-                      </div>
+                        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#FDC304] to-transparent shadow-[0_0_20px_rgba(253,195,4,0.9),0_0_40px_rgba(253,195,4,0.45)]" />
+                        <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-[#FDC304]/[0.12] via-[#FDC304]/[0.04] to-transparent" />
+                      </motion.div>
 
-                      {/* Card header — brand blue */}
-                      <div className="relative bg-[#0241A8] px-5 pb-6 pt-1">
-                        {/* Brand mark + ID */}
-                        <div className="flex items-center justify-between mb-5">
+                      {/* Blue identity field */}
+                      <div className="relative">
+                        {/* Field gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#0746b8] via-[#0241A8] to-[#02338f]" />
+                        {/* Top glow */}
+                        <div className="absolute -top-20 left-1/2 -translate-x-1/2 h-40 w-72 rounded-full bg-[#3FA9F5]/25 blur-[70px]" />
+                        {/* Security micro-lines */}
+                        <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 8px)" }} />
+                        {/* Ghost watermark */}
+                        <div className="absolute -top-6 -right-8 pointer-events-none opacity-[0.13]" style={{ filter: "brightness(0) invert(1)" }}>
+                          <WorkTagMark className="h-44 w-44" />
+                        </div>
+
+                        {/* Status bar */}
+                        <div className="relative flex items-center justify-between px-6 pt-6 pb-3">
+                          <span className="text-[10px] font-semibold text-white/70">9:41</span>
                           <div className="flex items-center gap-1.5">
-                            <svg viewBox="0 0 1254 1254" fill="none" className="h-5 w-5">
-                              <path fill="#0241A8" d="M828.299744,120.640442 C868.475464,138.184631 908.303101,155.560715 948.102966,173.000244 C973.628723,184.185150 989.682861,203.267822 996.070068,230.505661 C1014.570007,309.397736 1033.110718,388.280334 1051.727783,467.144867 C1057.879395,493.204407 1057.520508,518.801086 1048.593628,544.335083 C1023.385742,616.437256 998.576721,688.678772 973.501099,760.827332 C934.798950,872.182556 895.953186,983.487854 857.274536,1094.851074 C839.357666,1146.437134 783.566467,1172.596069 732.067139,1154.290894 C591.882751,1104.463013 451.541351,1055.076782 311.264099,1005.510010 C301.700989,1002.130859 291.890411,999.301453 282.643250,995.204407 C236.153366,974.606750 213.536255,920.801392 227.682144,873.230164 C245.089554,814.690735 263.202667,756.360168 281.169098,697.988098 C302.924713,627.305298 324.787964,556.655457 346.723755,486.028320 C355.609558,457.418610 365.374664,429.069672 373.681183,400.296509 C379.874329,378.844055 391.553772,361.754639 409.407654,348.825104 C428.158844,335.245819 447.099792,321.921875 466.139771,308.749329 C522.705261,269.615326 579.340637,230.582138 635.988342,191.567032 C666.026306,170.878860 695.662781,149.554688 726.363098,129.895752 C758.186829,109.517433 792.566589,107.290932 828.299744,120.640442 Z"/>
-                              <path fill="#FDC304" d="M556.057129,742.076294 C501.786530,745.407104 459.961334,702.722351 464.173920,648.810547 C466.747742,615.871277 491.009644,586.103210 524.089355,575.297424 C554.953674,565.215271 590.627991,575.356140 612.173401,600.336243 C655.742371,650.850769 629.973145,727.492981 564.912292,740.842224 C562.145386,741.409973 559.309326,741.640442 556.057129,742.076294 Z"/>
+                            {/* Signal bars */}
+                            <svg viewBox="0 0 18 12" className="h-2.5 w-3.5" fill="none">
+                              <rect x="0" y="9" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="4" y="6" width="3" height="6" rx="0.5" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="8" y="3" width="3" height="9" rx="0.5" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="12" y="0" width="3" height="12" rx="0.5" fill="rgba(255,255,255,0.7)"/>
                             </svg>
-                            <span className="text-[9px] font-bold tracking-[0.2em] text-white/50">WorkTag</span>
+                            {/* 5G */}
+                            <span className="text-[8px] font-bold text-white/70">5G</span>
+                            {/* Battery */}
+                            <svg viewBox="0 0 28 13" className="h-2.5 w-5" fill="none">
+                              <rect x="0.5" y="0.5" width="23" height="12" rx="2.5" stroke="rgba(255,255,255,0.5)"/>
+                              <rect x="2" y="2" width="18" height="9" rx="1.5" fill="rgba(255,255,255,0.7)"/>
+                              <path d="M25 4.5V8.5C25.8 8.5 26.5 7.8 26.5 7C26.5 6.2 25.8 4.5 25 4.5Z" fill="rgba(255,255,255,0.5)"/>
+                            </svg>
                           </div>
-                          <span className="text-[8px] font-medium text-white/25 tracking-wider">WT-8F2K-9X4M</span>
                         </div>
 
-                        {/* Avatar — large, centered, with brand gradient ring */}
-                        <div className="flex justify-center mb-4">
-                          <div className="relative">
-                            <div className="absolute -inset-[3px] rounded-full bg-gradient-to-br from-[#FDC304] via-[#0241A8] to-[#FDC304] opacity-80" />
-                            <div className="relative h-24 w-24 rounded-full overflow-hidden ring-[3px] ring-[#0241A8]">
-                              <Image src="/images/avatars/funke.jpg" alt="Funke Ogunlesi" width={96} height={96} className="w-full h-full object-cover" />
+                        {/* Identity content */}
+                        <div className="relative px-5 pb-[96px]">
+                          {/* Brand mark + ID slot */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1.5">
+                              <WorkTagMark className="h-5 w-5" />
+                              <span className="text-[9px] font-bold tracking-[0.2em] text-white/55">WorkTag</span>
                             </div>
-                            <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center ring-[2.5px] ring-[#0241A8]">
-                              <Check className="h-3 w-3 text-white stroke-[3]" />
+                            <div className="flex items-center gap-2">
+                              <span className="text-[7px] font-semibold text-[#FDC304]/80 tracking-[0.14em] border border-[#FDC304]/25 rounded-md px-1.5 py-[3px] bg-[#FDC304]/[0.07]">WT-8F2K-9X4M</span>
+                              <motion.button
+                                type="button"
+                                onClick={() => setQrOpen(true)}
+                                aria-label="Open scannable WorkTag QR code"
+                                className="group relative h-9 w-9 rounded-md bg-white p-[3px] shadow-[0_10px_24px_-6px_rgba(0,0,0,0.6),0_0_0_1px_rgba(253,195,4,0.4)] hover:shadow-[0_12px_28px_-6px_rgba(253,195,4,0.55),0_0_0_1px_rgba(253,195,4,0.7)] transition-shadow cursor-pointer"
+                              >
+                                <Image src="/images/qr-worktag.webp" alt="WorkTag QR code" width={36} height={36} className="w-full h-full object-contain" />
+                              </motion.button>
+                            </div>
+                          </div>
+
+                          {/* Avatar — double gold ring */}
+                          <div className="flex justify-center mt-5 mb-4">
+                            <div className="relative">
+                              <div className="absolute -inset-[5px] rounded-full border border-[#FDC304]/40" />
+                              <div className="absolute -inset-[3px] rounded-full bg-gradient-to-br from-[#FDC304] via-[#3FA9F5] to-[#0241A8]" />
+                              <div className="relative h-24 w-24 rounded-full overflow-hidden ring-[3px] ring-[#0241A8]">
+                                <Image src="/images/avatars/funke.jpg" alt="Funke Ogunlesi" width={96} height={96} className="w-full h-full object-cover" />
+                              </div>
+                              <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center ring-[2.5px] ring-[#0241A8] shadow-[0_0_12px_rgba(16,185,129,0.55)]">
+                                <Check className="h-3 w-3 text-white stroke-[3]" />
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Name + Business + Location */}
+                          <div className="text-center">
+                            <h3 className="text-[18px] font-bold text-white leading-tight tracking-[-0.01em]">Funke Ogunlesi</h3>
+                            <p className="text-[11px] text-white/60 font-medium mt-0.5">Funke&apos;s Kitchen</p>
+                            <div className="inline-flex items-center gap-1 mt-1">
+                              <MapPin className="h-2.5 w-2.5 text-white/40" />
+                              <p className="text-[9px] text-white/40">Catering & Events · Lagos, Nigeria</p>
+                            </div>
+                            <div className="flex items-center justify-center gap-1.5 mt-2">
+                              <div className="flex items-center gap-1 bg-[#FDC304]/[0.12] border border-[#FDC304]/30 rounded-full px-1.5 py-[2px]">
+                                <Star className="h-2 w-2 fill-[#FDC304] text-[#FDC304]" />
+                                <span className="text-[7px] font-bold text-[#FDC304]">5.0</span>
+                                <span className="text-[7px] text-white/45">· 38 reviews</span>
+                              </div>
+                              <div className="flex items-center gap-1 bg-[#10B981]/[0.12] border border-[#10B981]/35 rounded-full px-1.5 py-[2px]">
+                                <Check className="h-2 w-2 text-[#10B981]" strokeWidth={3} />
+                                <span className="text-[7px] font-bold text-[#10B981]">Verified</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Trust gauge */}
+                          <div className="flex items-center justify-center gap-4 mt-4">
+                            <div className="relative h-14 w-14">
+                              <svg viewBox="0 0 48 48" className="h-14 w-14 -rotate-90">
+                                <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="3.5" />
+                                <circle cx="24" cy="24" r="20" fill="none" stroke="url(#trustGoldGrad)" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="125.6" strokeDashoffset="3.77" />
+                                <defs>
+                                  <linearGradient id="trustGoldGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stopColor="#FDE68A" />
+                                    <stop offset="55%" stopColor="#FDC304" />
+                                    <stop offset="100%" stopColor="#C79A00" />
+                                  </linearGradient>
+                                </defs>
+                              </svg>
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-[16px] font-[800] text-[#FDC304] leading-none">97</span>
+                              </div>
+                            </div>
+                            <div className="h-9 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+                            <div>
+                              <span className="text-[7px] font-semibold uppercase tracking-[0.18em] text-white/40">Trust Score</span>
+                              <div className="flex items-center gap-1.5 mt-1">
+                                <ShieldCheck className="h-3.5 w-3.5 text-[#10B981]" />
+                                <span className="text-[9px] font-semibold text-[#10B981]">Verified</span>
+                              </div>
+                              <span className="block text-[7px] text-[#94A3B8]/70 mt-0.5">4 of 5 checks</span>
+                            </div>
+                          </div>
+
+                          {/* Verifications */}
+                          <div className="relative mt-4">
+                            <div className="mb-2.5 flex items-center justify-between">
+                              <div className="flex items-center gap-1.5">
+                                <ShieldCheck className="h-3 w-3 text-[#3FA9F5]" />
+                                <span className="text-[8px] font-bold uppercase tracking-wider text-white/45">Verifications</span>
+                              </div>
+                              <div className="flex items-center gap-[3px]">
+                                {[0, 1, 2, 3].map((i) => (
+                                  <span key={i} className="h-[5px] w-[5px] rounded-full bg-[#10B981]" />
+                                ))}
+                                <span className="h-[5px] w-[5px] rounded-full bg-[#64748B]" />
+                                <span className="ml-1 text-[7px] font-bold text-[#94A3B8]">4/5</span>
+                              </div>
+                            </div>
+
+                            {/* Seal wire */}
+                            <div className="absolute left-9 right-9 top-[52px] h-px bg-gradient-to-r from-[#FDC304]/0 via-[#FDC304]/25 to-[#FDC304]/0 pointer-events-none" />
+
+                            <div className="relative flex items-start justify-between">
+                              {/* Identity */}
+                              <div className="flex flex-col items-center gap-1">
+                                <div className="relative">
+                                  <div className="h-9 w-9 rounded-full bg-[#FDC304] border-2 border-[#0241A8] ring-2 ring-white flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_10px_-2px_rgba(0,0,0,0.5)]">
+                                    <ShieldCheck className="h-4 w-4 text-[#0241A8]" />
+                                  </div>
+                                  <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-[#10B981] border-2 border-[#02338f] flex items-center justify-center">
+                                    <Check className="h-1.5 w-1.5 text-white stroke-[4]" />
+                                  </div>
+                                </div>
+                                <span className="text-[7px] font-semibold text-white/45">Identity</span>
+                              </div>
+
+                              {/* Phone */}
+                              <div className="flex flex-col items-center gap-1">
+                                <div className="relative">
+                                  <div className="h-9 w-9 rounded-full bg-[#FDC304] border-2 border-[#0241A8] ring-2 ring-white flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_10px_-2px_rgba(0,0,0,0.5)]">
+                                    <Smartphone className="h-4 w-4 text-[#0241A8]" />
+                                  </div>
+                                  <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-[#10B981] border-2 border-[#02338f] flex items-center justify-center">
+                                    <Check className="h-1.5 w-1.5 text-white stroke-[4]" />
+                                  </div>
+                                </div>
+                                <span className="text-[7px] font-semibold text-white/45">Phone</span>
+                              </div>
+
+                              {/* Email */}
+                              <div className="flex flex-col items-center gap-1">
+                                <div className="relative">
+                                  <div className="h-9 w-9 rounded-full bg-[#FDC304] border-2 border-[#0241A8] ring-2 ring-white flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_10px_-2px_rgba(0,0,0,0.5)]">
+                                    <Mail className="h-4 w-4 text-[#0241A8]" />
+                                  </div>
+                                  <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-[#10B981] border-2 border-[#02338f] flex items-center justify-center">
+                                    <Check className="h-1.5 w-1.5 text-white stroke-[4]" />
+                                  </div>
+                                </div>
+                                <span className="text-[7px] font-semibold text-white/45">Email</span>
+                              </div>
+
+                              {/* Address */}
+                              <div className="flex flex-col items-center gap-1">
+                                <div className="relative">
+                                  <div className="h-9 w-9 rounded-full bg-[#FDC304] border-2 border-[#0241A8] ring-2 ring-white flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_10px_-2px_rgba(0,0,0,0.5)]">
+                                    <MapPin className="h-4 w-4 text-[#0241A8]" />
+                                  </div>
+                                  <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-[#10B981] border-2 border-[#02338f] flex items-center justify-center">
+                                    <Check className="h-1.5 w-1.5 text-white stroke-[4]" />
+                                  </div>
+                                </div>
+                                <span className="text-[7px] font-semibold text-white/45">Address</span>
+                              </div>
+
+                              {/* Physical — pending */}
+                              <div className="flex flex-col items-center gap-1">
+                                <div className="relative">
+                                  <div className="h-9 w-9 rounded-full bg-white border-2 border-dashed border-[#0241A8] flex items-center justify-center shadow-[0_4px_10px_-2px_rgba(0,0,0,0.35)]">
+                                    <UserCheck className="h-4 w-4 text-[#64748B]" />
+                                  </div>
+                                  <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-[#475569] border-2 border-[#02338f] flex items-center justify-center">
+                                    <Clock className="h-1.5 w-1.5 text-white/80" strokeWidth={3} />
+                                  </div>
+                                </div>
+                                <span className="text-[7px] font-semibold text-white/30">Physical</span>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Name + Business + Location */}
-                        <div className="text-center mb-1">
-                          <h3 className="text-[17px] font-bold text-white leading-tight tracking-[-0.01em]">Funke Ogunlesi</h3>
-                        </div>
-                        <div className="text-center mb-0.5">
-                          <p className="text-[12px] text-white/60 font-medium">Funke&apos;s Kitchen</p>
-                        </div>
-                        <div className="text-center mb-4">
-                          <p className="text-[10px] text-white/35">Catering & Events · Lagos, Nigeria</p>
-                        </div>
-
-                        {/* Trust Score + Verified */}
-                        <div className="flex items-center justify-center gap-3">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-[20px] font-[800] text-[#FDC304] leading-none">97</span>
-                            <span className="text-[7px] text-white/30 font-medium leading-tight">Trust<br/>Score</span>
-                          </div>
-                          <div className="w-px h-4 bg-white/15" />
-                          <div className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
-                            <span className="text-[9px] font-semibold text-[#10B981]">Verified</span>
-                          </div>
-                        </div>
+                        {/* Organic wave into white */}
+                        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 320 92" preserveAspectRatio="none" style={{ height: 92 }}>
+                          <path d="M0,30 C60,80 120,10 180,44 C240,78 290,30 320,44 L320,92 L0,92 Z" fill="#ffffff" />
+                          <path d="M0,33 C60,83 120,13 180,47 C240,81 290,33 320,47" fill="none" stroke="#FDC304" strokeWidth="1.5" opacity="0.55" />
+                        </svg>
                       </div>
 
-                      {/* Card body — white */}
-                      <div className="bg-white px-4 py-4">
-                        {/* Action buttons */}
-                        <div className="grid grid-cols-4 gap-1.5 mb-4">
-                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#10B981]/[0.08] border border-[#10B981]/[0.12]">
-                            <WhatsAppIcon className="h-4 w-4 text-[#10B981]" />
-                            <span className="text-[7px] font-bold text-[#10B981]">WhatsApp</span>
+                      {/* White field */}
+                      <div className="relative bg-white px-4 pb-5 pt-4">
+                        {/* Actions */}
+                        <div className="relative grid grid-cols-4 gap-1.5">
+                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#25D366] border border-[#1eb956] shadow-[0_6px_16px_-4px_rgba(37,211,102,0.45)]">
+                            <WhatsAppIcon className="h-4 w-4 text-white" />
+                            <span className="text-[7px] font-bold text-white">WhatsApp</span>
                           </button>
-                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#0241A8]/[0.06] border border-[#0241A8]/[0.1]">
-                            <PhoneIcon className="h-4 w-4 text-[#0241A8]" />
-                            <span className="text-[7px] font-bold text-[#0241A8]">Call</span>
+                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#0241A8] border border-[#012f7a] shadow-[0_6px_16px_-4px_rgba(2,65,168,0.45)]">
+                            <PhoneIcon className="h-4 w-4 text-white" />
+                            <span className="text-[7px] font-bold text-white">Call</span>
                           </button>
-                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#FDC304]/[0.08] border border-[#FDC304]/[0.12]">
-                            <BriefcaseIcon className="h-4 w-4 text-[#B8960F]" />
-                            <span className="text-[7px] font-bold text-[#B8960F]">Hire Me</span>
+                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-gradient-to-br from-[#FDC304] to-[#d9a402] border border-[#FDC304]/60 shadow-[0_6px_16px_-4px_rgba(253,195,4,0.45)]">
+                            <BriefcaseIcon className="h-4 w-4 text-[#090D1F]" />
+                            <span className="text-[7px] font-bold text-[#090D1F]">Hire Me</span>
                           </button>
-                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#5A6A8A]/[0.06] border border-[#5A6A8A]/[0.1]">
-                            <SaveIcon className="h-4 w-4 text-[#5A6A8A]" />
-                            <span className="text-[7px] font-bold text-[#5A6A8A]">Save</span>
+                          <button className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-[#475569] border border-[#334155] shadow-[0_6px_16px_-4px_rgba(71,85,105,0.45)]">
+                            <SaveIcon className="h-4 w-4 text-white" />
+                            <span className="text-[7px] font-bold text-white">Save</span>
                           </button>
                         </div>
 
-                        {/* Statistics */}
-                        <div className="grid grid-cols-2 gap-2.5">
+                        {/* Stats band */}
+                        <div className="relative mt-3 grid grid-cols-4 divide-x divide-[#E8EBF2]/70 rounded-xl border border-[#E8EBF2]/70 bg-white shadow-[0_6px_20px_-6px_rgba(2,65,168,0.08)] overflow-hidden">
                           {/* Jobs Completed */}
-                          <div className="rounded-xl bg-[#F8F9FC] border border-[#E8EBF2]/60 p-2.5">
-                            <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[8px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider">Jobs Done</span>
-                              <span className="text-[13px] font-[800] text-[#0241A8] leading-none">94%</span>
-                            </div>
-                            <div className="h-1 rounded-full bg-[#E8EBF2]/60 overflow-hidden">
-                              <motion.div
-                                className="h-full rounded-full bg-[#0241A8]"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: "94%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, delay: 0.2 }}
-                              />
+                          <div className="px-1.5 py-2.5 text-center">
+                            <div className="text-[13px] font-[800] text-[#090D1F] leading-none">47</div>
+                            <div className="text-[6.5px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider mt-1">Jobs Done</div>
+                            <div className="mt-1.5 flex justify-center">
+                              <svg width="34" height="10" viewBox="0 0 36 10" className="overflow-visible">
+                                <defs>
+                                  <linearGradient id="jobSpark" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stopColor="#3FA9F5" />
+                                    <stop offset="100%" stopColor="#0241A8" />
+                                  </linearGradient>
+                                </defs>
+                                <path d="M1,8.5 L9,6 L17,7 L25,3 L35,1" fill="none" stroke="url(#jobSpark)" strokeWidth="1.5" strokeLinecap="round" />
+                                <circle cx="35" cy="1" r="1.6" fill="#10B981" />
+                              </svg>
                             </div>
                           </div>
 
                           {/* Repeat Customers */}
-                          <div className="rounded-xl bg-[#F8F9FC] border border-[#E8EBF2]/60 p-2.5">
-                            <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[8px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider">Repeat</span>
-                              <span className="text-[13px] font-[800] text-[#10B981] leading-none">87%</span>
-                            </div>
-                            <div className="h-1 rounded-full bg-[#E8EBF2]/60 overflow-hidden">
-                              <motion.div
-                                className="h-full rounded-full bg-[#10B981]"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: "87%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, delay: 0.3 }}
-                              />
+                          <div className="px-1.5 py-2.5 text-center">
+                            <div className="text-[13px] font-[800] text-[#090D1F] leading-none">12</div>
+                            <div className="text-[6.5px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider mt-1">Repeat</div>
+                            <div className="mt-1.5 flex items-center justify-center">
+                              <div className="flex -space-x-1">
+                                <span className="h-2.5 w-2.5 rounded-full bg-[#3FA9F5] border border-white" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-[#FDC304] border border-white" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-[#10B981] border border-white" />
+                              </div>
+                              <span className="ml-1 text-[6.5px] font-bold text-[#C79A00]">+9 more</span>
                             </div>
                           </div>
 
                           {/* Years Experience */}
-                          <div className="rounded-xl bg-[#F8F9FC] border border-[#E8EBF2]/60 p-2.5">
-                            <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[8px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider">Experience</span>
-                              <span className="text-[13px] font-[800] text-[#090D1F] leading-none">4yr</span>
-                            </div>
-                            <div className="flex items-center gap-0.5">
-                              {[1, 2, 3, 4].map((yr) => (
-                                <div key={yr} className="h-1 flex-1 rounded-full bg-[#0241A8]" />
-                              ))}
-                              {[5, 6].map((yr) => (
-                                <div key={yr} className="h-1 flex-1 rounded-full bg-[#E8EBF2]/60" />
-                              ))}
+                          <div className="px-1.5 py-2.5 text-center">
+                            <div className="text-[13px] font-[800] text-[#090D1F] leading-none">4yr</div>
+                            <div className="text-[6.5px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider mt-1">Experience</div>
+                            <div className="mt-1.5 flex items-center justify-center gap-1">
+                              <span className="text-[5.5px] font-semibold text-[#5A6A8A]/60">2022</span>
+                              <div className="relative w-7">
+                                <div className="h-px bg-gradient-to-r from-[#FDC304] to-[#0241A8]" />
+                                <span className="absolute -top-[2.5px] left-1/2 h-1.5 w-1.5 rounded-full bg-[#FDC304] ring-1 ring-white" />
+                              </div>
+                              <span className="text-[5.5px] font-semibold text-[#5A6A8A]/60">2026</span>
                             </div>
                           </div>
 
                           {/* Avg Response Time */}
-                          <div className="rounded-xl bg-[#F8F9FC] border border-[#E8EBF2]/60 p-2.5">
-                            <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[8px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider">Response</span>
-                              <span className="text-[13px] font-[800] text-[#FDC304] leading-none">&lt;1hr</span>
-                            </div>
-                            <div className="h-1 rounded-full bg-[#E8EBF2]/60 overflow-hidden">
-                              <motion.div
-                                className="h-full rounded-full bg-[#FDC304]"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: "92%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, delay: 0.5 }}
-                              />
+                          <div className="px-1.5 py-2.5 text-center">
+                            <div className="text-[13px] font-[800] text-[#090D1F] leading-none">&lt;1hr</div>
+                            <div className="text-[6.5px] font-semibold text-[#5A6A8A]/60 uppercase tracking-wider mt-1">Response</div>
+                            <div className="mt-1.5 flex justify-center">
+                              <svg width="34" height="12" viewBox="-1 -6 36 20">
+                                <path d="M2,12 A15,15 0 0 1 32,12" fill="none" stroke="#E8EBF2" strokeWidth="2.5" strokeLinecap="round" />
+                                <path d="M2,12 A15,15 0 0 1 17,-3" fill="none" stroke="#FDC304" strokeWidth="2.5" strokeLinecap="round" />
+                              </svg>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      </motion.div>
 
-                      {/* Bottom bar — always visible */}
-                      <div className="bg-white border-t border-[#E8EBF2]/60 px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[8px] font-medium text-[#5A6A8A]/40">Member since 2022</span>
-                        <span className="text-[8px] font-medium text-[#0241A8]/40">worktag.io/funke</span>
+                        {/* Microtype */}
+                        <div className="relative flex items-center justify-between px-1 pt-3.5">
+                          <span className="text-[7px] font-semibold uppercase tracking-[0.12em] text-[#5A6A8A]/50">Member since 2022</span>
+                          <span className="text-[8px] font-medium text-[#0241A8]/50">worktag.io/funke</span>
+                        </div>
                       </div>
                     </div>
 
@@ -415,8 +571,8 @@ export function BenefitIdentity() {
                         </div>
                       ))}
                     </div>
-                    <span className="text-[12px] text-white/50 font-medium">
-                      <span className="text-white font-bold">10,000+</span> professionals trust WorkTag
+                    <span className="text-[12px] text-[#FDC304] font-medium">
+                      <span className="text-[#FDC304] font-bold">10,000+</span> professionals trust WorkTag
                     </span>
                   </div>
                 </motion.div>
@@ -425,6 +581,37 @@ export function BenefitIdentity() {
           </div>
         </div>
       </div>
+
+      <Dialog open={qrOpen} onOpenChange={setQrOpen}>
+        <DialogContent className="max-w-xs">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-[15px] font-bold text-[#0F172A]">
+              <WorkTagMark className="h-5 w-5" />
+              Scan Funke&apos;s WorkTag
+            </DialogTitle>
+            <DialogDescription className="text-[13px] text-[#64748B]">
+              Point any camera at the QR code to see her verified profile.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mx-auto my-2 h-52 w-52 rounded-2xl border border-[#E2E8F0] bg-white p-3 shadow-[0_8px_30px_-8px_rgba(2,65,168,0.15)]">
+            <Image src="/images/qr-worktag.webp" alt="Funke's WorkTag QR code" width={208} height={208} className="h-full w-full object-contain" />
+          </div>
+          <div className="mx-auto flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-1.5">
+            <Link2 className="h-3.5 w-3.5 text-[#94A3B8]" />
+            <span className="text-[13px] font-semibold text-[#0F172A]">worktag.io/funke</span>
+          </div>
+          <DialogFooter className="gap-2 sm:flex-row sm:justify-center">
+            <Button variant="outline" onClick={copyLink} className="flex-1 gap-1.5">
+              {copied ? <Check className="h-4 w-4 text-[#10B981]" /> : <Copy className="h-4 w-4" />}
+              {copied ? "Copied" : "Copy link"}
+            </Button>
+            <Button onClick={shareQr} className="flex-1 gap-1.5 bg-[#0241A8] hover:bg-[#012f7a]">
+              <Share2 className="h-4 w-4" />
+              Share
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
