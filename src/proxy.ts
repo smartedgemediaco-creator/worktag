@@ -1,31 +1,32 @@
 import { getSessionCookie } from "better-auth/cookies";
 import { NextResponse, type NextRequest } from "next/server";
 
-const publicRoutes = ["/", "/login", "/register", "/forgot-password", "/reset-password"];
+const protectedPrefixes = ["/dashboard", "/onboarding"];
+const authPages = ["/login", "/register", "/forgot-password", "/reset-password"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isPublicRoute = publicRoutes.some(
-    (route) => pathname === route || pathname.startsWith("/api/")
-  );
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
 
   const sessionCookie = getSessionCookie(request, {
     cookiePrefix: "better-auth",
     cookieName: "session_token",
   });
 
-  if (pathname.startsWith("/api/auth")) {
-    return NextResponse.next();
-  }
+  const isProtected = protectedPrefixes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`)
+  );
 
-  if (!sessionCookie && !isPublicRoute && !pathname.startsWith("/_next")) {
+  if (!sessionCookie && isProtected) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (sessionCookie && (pathname === "/login" || pathname === "/register")) {
+  if (sessionCookie && authPages.includes(pathname)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 

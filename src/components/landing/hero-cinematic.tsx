@@ -18,6 +18,13 @@ const CATEGORIES = [
   "Verified Caterers",
   "Certified Painters",
   "Trusted Real Estate",
+  "Verified Accountants",
+  "Licensed Doctors",
+  "Certified Lawyers",
+  "Qualified Pharmacists",
+  "Registered Nurses",
+  "Trusted Architects",
+  "Licensed Surveyors",
 ];
 
 const fadeUp = {

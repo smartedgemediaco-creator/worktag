@@ -77,24 +77,28 @@ const NAV_ITEMS: MegaMenuItem[] = [
         label: "Acrylic Tags",
         description: "Premium acrylic tags for storefronts and counters",
         href: "#qr-experience",
+        image: "/images/acrylic.png",
       },
       {
         icon: QrCode,
         label: "PVC Cards",
         description: "Durable PVC cards for business card integration",
         href: "#qr-experience",
+        image: "/images/pvc.png",
       },
       {
         icon: Sparkles,
         label: "Stickers",
         description: "Weatherproof stickers for windows, vehicles, and equipment",
         href: "#qr-experience",
+        image: "/images/stickers.png",
       },
       {
         icon: Briefcase,
         label: "Business Cards",
         description: "Premium cards with embedded QR technology",
         href: "#qr-experience",
+        image: "/images/card stack.png",
       },
     ],
   },
@@ -374,7 +378,17 @@ export function MegaNav() {
                               className="group flex items-start gap-3.5 rounded-xl p-3.5 transition-all duration-300 hover:bg-[#F4F6FA]/80"
                             >
                               <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0241A8]/[0.07] text-[#0241A8] group-hover:bg-[#0241A8]/[0.12] transition-colors duration-300">
-                                <Icon className="h-4.5 w-4.5" />
+                                {child.image ? (
+                                  <Image
+                                    src={child.image}
+                                    alt={child.label}
+                                    width={36}
+                                    height={36}
+                                    className="h-full w-full rounded-[7px] object-cover"
+                                  />
+                                ) : (
+                                  <Icon className="h-4.5 w-4.5" />
+                                )}
                               </span>
                               <div className="min-w-0 flex-1">
                                 <div className="flex items-center gap-2">
@@ -450,7 +464,17 @@ export function MegaNav() {
                                   onClick={() => setMobileOpen(false)}
                                   className="flex items-center gap-3 py-2.5 rounded-lg hover:bg-[#F4F6FA] transition-colors"
                                 >
-                                  <Icon className="h-4 w-4 text-[#0241A8]" />
+                                  {child.image ? (
+                                    <Image
+                                      src={child.image}
+                                      alt={child.label}
+                                      width={28}
+                                      height={28}
+                                      className="h-7 w-7 shrink-0 rounded-full object-cover"
+                                    />
+                                  ) : (
+                                    <Icon className="h-4 w-4 text-[#0241A8]" />
+                                  )}
                                   <span className="text-sm font-medium text-[#475569]">{child.label}</span>
                                 </Link>
                               );

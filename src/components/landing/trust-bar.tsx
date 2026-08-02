@@ -15,6 +15,13 @@ const SECTORS = [
   { name: "Verified Caterers", icon: Award },
   { name: "Certified Painters", icon: BadgeCheck },
   { name: "Trusted Real Estate", icon: TrendingUp },
+  { name: "Verified Accountants", icon: ShieldCheck },
+  { name: "Licensed Doctors", icon: Award },
+  { name: "Certified Lawyers", icon: BadgeCheck },
+  { name: "Qualified Pharmacists", icon: ShieldCheck },
+  { name: "Registered Nurses", icon: Check },
+  { name: "Trusted Architects", icon: Sparkles },
+  { name: "Licensed Surveyors", icon: TrendingUp },
 ];
 
 export function TrustBar() {
@@ -28,7 +35,6 @@ export function TrustBar() {
             transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
           >
             {[...SECTORS, ...SECTORS].map((sector, i) => {
-              const Icon = sector.icon;
               return (
                 <div
                   key={i}
