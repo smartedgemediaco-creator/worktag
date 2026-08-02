@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { Plus, Minus, ArrowRight, ShieldCheck, QrCode, Tags, UserRound, TrendingUp, Globe } from "lucide-react";
 import { WorkTagMark } from "./worktag-logo";
 
@@ -178,13 +179,13 @@ export function FAQSection() {
                 </div>
                 <p className="text-sm font-bold mb-1">Still have questions?</p>
                 <p className="text-[11px] text-white/70 mb-5">Our team is here to help you get started.</p>
-                <a
+                <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 rounded-lg bg-[#FDC304] px-4 py-2.5 text-xs font-bold text-[#090D1F] shadow-[0_8px_20px_-8px_rgba(253,195,4,0.7)] transition-all duration-300 hover:bg-[#FDE047] hover:-translate-y-0.5"
                 >
                   Contact Support
                   <ArrowRight className="h-3.5 w-3.5" />
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

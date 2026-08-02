@@ -3,6 +3,7 @@ import {
   MissingProviderConfigError,
   UnknownProviderError,
 } from "@/infra/errors";
+import { isProdLike } from "@/infra/runtime";
 import { consoleEmailProvider } from "./console";
 import { resendEmailProvider } from "./resend";
 import type { EmailProvider } from "./types";
@@ -13,7 +14,10 @@ export function getEmailProvider(
   envOverride: EmailEnv = env,
   nodeEnv: string = process.env.NODE_ENV ?? "development"
 ): EmailProvider {
-  const provider = envOverride.EMAIL_PROVIDER ?? (nodeEnv === "production" ? "resend" : "console");
+  if (!envOverride.EMAIL_PROVIDER && isProdLike(nodeEnv)) {
+    throw new MissingProviderConfigError("email", "EMAIL_PROVIDER");
+  }
+  const provider = envOverride.EMAIL_PROVIDER ?? "console";
 
   switch (provider) {
     case "console":

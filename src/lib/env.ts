@@ -1,7 +1,18 @@
 import { z } from "zod";
+import { resolveAppEnv } from "@/infra/runtime";
+
+const rawAppEnv =
+  process.env.APP_ENV ??
+  (process.env.VERCEL_ENV === "preview"
+    ? "staging"
+    : process.env.VERCEL_ENV) ??
+  process.env.NODE_ENV ??
+  "development";
 
 export const envSchema = z.object({
+  APP_ENV: z.enum(["development", "staging", "production"]).default(resolveAppEnv(rawAppEnv)),
   DATABASE_URL: z.string().url(),
+  DIRECT_URL: z.string().url().optional(),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.string().url(),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),

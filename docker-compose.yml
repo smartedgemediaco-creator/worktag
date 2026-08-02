@@ -1,0 +1,68 @@
+# WorkTag Docker Compose — staging and production in one file.
+#
+#   # local: build and run the production app against .env.production
+#   docker compose --profile production up --build
+#
+#   # deploy a pre-built image from a registry
+#   export WORKTAG_IMAGE_TAG=production
+#   docker compose --profile production pull
+#   docker compose --profile production up -d
+#
+# Every service reads its OWN env file so staging and production can never
+# cross-contaminate credentials. Create .env.staging / .env.production from
+# the *.example templates before running.
+
+name: worktag
+
+x-app: &app
+  image: ghcr.io/${IMAGE_REPO:-myworktag}/worktag:${WORKTAG_IMAGE_TAG:-latest}
+  build:
+    context: .
+    dockerfile: Dockerfile
+  restart: unless-stopped
+  init: true
+  healthcheck:
+    test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health/ready"]
+    interval: 30s
+    timeout: 5s
+    retries: 3
+    start_period: 15s
+
+services:
+  # ---------------- staging ----------------
+  migrate-staging:
+    <<: *app
+    profiles: ["staging"]
+    env_file: .env.staging
+    command: node node_modules/prisma/build/index.js migrate deploy
+    healthcheck:
+      disable: true
+
+  web-staging:
+    <<: *app
+    profiles: ["staging"]
+    env_file: .env.staging
+    ports:
+      - "127.0.0.1:3001:3000"
+    depends_on:
+      migrate-staging:
+        condition: service_completed_successfully
+
+  # ---------------- production ----------------
+  migrate:
+    <<: *app
+    profiles: ["production"]
+    env_file: .env.production
+    command: node node_modules/prisma/build/index.js migrate deploy
+    healthcheck:
+      disable: true
+
+  web:
+    <<: *app
+    profiles: ["production"]
+    env_file: .env.production
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully

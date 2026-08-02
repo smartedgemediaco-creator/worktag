@@ -3,6 +3,7 @@ import {
   MissingProviderConfigError,
   UnknownProviderError,
 } from "@/infra/errors";
+import { isProdLike } from "@/infra/runtime";
 import { consoleSmsProvider } from "./console";
 import { termiiSmsProvider } from "./termii";
 import { twilioSmsProvider } from "./twilio";
@@ -24,7 +25,10 @@ export function getSmsProvider(
   envOverride: SmsEnv = env,
   nodeEnv: string = process.env.NODE_ENV ?? "development"
 ): SmsProvider {
-  const provider = envOverride.SMS_PROVIDER ?? (nodeEnv === "production" ? "termii" : "console");
+  if (!envOverride.SMS_PROVIDER && isProdLike(nodeEnv)) {
+    throw new MissingProviderConfigError("sms", "SMS_PROVIDER");
+  }
+  const provider = envOverride.SMS_PROVIDER ?? "console";
 
   switch (provider) {
     case "console":

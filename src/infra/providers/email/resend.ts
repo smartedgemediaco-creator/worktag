@@ -1,5 +1,7 @@
-import { Resend, type CreateEmailOptions } from "resend";
+import { ProviderRequestError } from "@/infra/errors";
 import type { EmailProvider, SendEmailInput, SendEmailResult } from "./types";
+
+const BASE_URL = "https://api.resend.com";
 
 export interface ResendEmailConfig {
   apiKey: string;
@@ -7,21 +9,32 @@ export interface ResendEmailConfig {
 }
 
 export function resendEmailProvider(config: ResendEmailConfig): EmailProvider {
-  const client = new Resend(config.apiKey);
-
   return {
     name: "resend",
     async send(input: SendEmailInput): Promise<SendEmailResult> {
-      const options = {
-        from: input.from ?? config.from ?? "WorkTag <no-reply@worktag.app>",
-        to: input.to,
-        subject: input.subject,
-        replyTo: input.replyTo,
-        ...(input.html ? { html: input.html } : {}),
-        ...(input.text ? { text: input.text } : {}),
-      } as unknown as CreateEmailOptions;
-      const { data } = await client.emails.send(options);
-      return { id: data?.id };
+      const response = await fetch(`${BASE_URL}/emails`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: input.from ?? config.from ?? "WorkTag <no-reply@worktag.app>",
+          to: input.to,
+          subject: input.subject,
+          reply_to: input.replyTo,
+          ...(input.html ? { html: input.html } : {}),
+          ...(input.text ? { text: input.text } : {}),
+        }),
+      });
+
+      if (!response.ok) {
+        const detail = await response.text().catch(() => undefined);
+        throw new ProviderRequestError("resend", "send", response.status, detail);
+      }
+
+      const body = (await response.json()) as { id?: string };
+      return { id: body.id };
     },
   };
 }

@@ -3,6 +3,7 @@ import {
   MissingProviderConfigError,
   UnknownProviderError,
 } from "@/infra/errors";
+import { isProdLike } from "@/infra/runtime";
 import { flutterwaveProvider } from "./flutterwave";
 import { paystackProvider } from "./paystack";
 import type { PaymentProvider } from "./types";
@@ -12,8 +13,12 @@ export type PaymentEnv = Partial<
 >;
 
 export function getPaymentProvider(
-  envOverride: PaymentEnv = env
+  envOverride: PaymentEnv = env,
+  nodeEnv: string = process.env.NODE_ENV ?? "development"
 ): PaymentProvider {
+  if (!envOverride.PAYMENT_PROVIDER && isProdLike(nodeEnv)) {
+    throw new MissingProviderConfigError("payment", "PAYMENT_PROVIDER");
+  }
   const provider = envOverride.PAYMENT_PROVIDER ?? "paystack";
 
   switch (provider) {

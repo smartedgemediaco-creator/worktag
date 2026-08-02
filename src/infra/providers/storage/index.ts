@@ -3,6 +3,7 @@ import {
   MissingProviderConfigError,
   UnknownProviderError,
 } from "@/infra/errors";
+import { isProdLike } from "@/infra/runtime";
 import { localStorageProvider } from "./local";
 import { s3StorageProvider } from "./s3";
 import type { StorageProvider } from "./types";
@@ -24,7 +25,10 @@ export function getStorageProvider(
   envOverride: StorageEnv = env,
   nodeEnv: string = process.env.NODE_ENV ?? "development"
 ): StorageProvider {
-  const provider = envOverride.STORAGE_PROVIDER ?? (nodeEnv === "production" ? "s3" : "local");
+  if (!envOverride.STORAGE_PROVIDER && isProdLike(nodeEnv)) {
+    throw new MissingProviderConfigError("storage", "STORAGE_PROVIDER");
+  }
+  const provider = envOverride.STORAGE_PROVIDER ?? "local";
 
   switch (provider) {
     case "local":

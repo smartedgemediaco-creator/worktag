@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { MissingProviderConfigError } from "@/infra/errors";
+import { describe, expect, it, vi } from "vitest";
+import { MissingProviderConfigError, ProviderRequestError } from "@/infra/errors";
 import { getEmailProvider } from "@/infra/providers/email";
 
 describe("getEmailProvider", () => {
@@ -33,5 +33,51 @@ describe("getEmailProvider", () => {
     await expect(
       provider.send({ to: "biz@example.com", subject: "Hello", text: "Body" })
     ).resolves.toEqual({});
+  });
+});
+
+describe("resend adapter", () => {
+  it("posts to the resend api with bearer auth and the right payload", async () => {
+    const { resendEmailProvider } = await import("./resend");
+    const provider = resendEmailProvider({ apiKey: "re_123", from: "WorkTag <no-reply@worktag.app>" });
+
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ id: "email_abc" }), { status: 200 })
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    const result = await provider.send({
+      to: "biz@example.com",
+      subject: "Hello",
+      text: "Body",
+      replyTo: "team@worktag.app",
+    });
+
+    expect(result.id).toBe("email_abc");
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://api.resend.com/emails",
+      expect.objectContaining({
+        method: "POST",
+        headers: expect.objectContaining({
+          Authorization: "Bearer re_123",
+        }),
+      })
+    );
+    expect(fetchMock.mock.calls[0][1].body).toContain('"to":"biz@example.com"');
+    expect(fetchMock.mock.calls[0][1].body).toContain('"reply_to":"team@worktag.app"');
+  });
+
+  it("throws a ProviderRequestError when resend returns an error status", async () => {
+    const { resendEmailProvider } = await import("./resend");
+    const provider = resendEmailProvider({ apiKey: "re_123" });
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response("rate limited", { status: 429 }))
+    );
+
+    await expect(
+      provider.send({ to: "biz@example.com", subject: "Hi", text: "Body" })
+    ).rejects.toThrow(ProviderRequestError);
   });
 });
